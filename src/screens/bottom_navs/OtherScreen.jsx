@@ -3,6 +3,8 @@ import React from 'react'
 
 const OtherScreen = (props) => {
 
+
+  console.log('Duong test');
   return (
 
     <SafeAreaView style={styles.container}>
