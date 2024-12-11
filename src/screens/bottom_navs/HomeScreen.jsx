@@ -1,38 +1,29 @@
-import { StyleSheet, Image, SafeAreaView, Pressable } from 'react-native'
-import React from 'react'
-import ScreenEnum from '../../constants/screenEnum'
-import axiosInstance from '../../axios'
+import {StyleSheet, Image, SafeAreaView, Pressable} from 'react-native';
+import React from 'react';
+import ScreenEnum from '../../constants/screenEnum';
+import axiosInstance from '../../axios';
 
-const HomeScreen = (props) => {
-  const { navigation } = props
+const HomeScreen = props => {
+  const {navigation} = props;
 
+  console.log('Phong test');
 
   return (
-
     <SafeAreaView style={styles.container}>
       <Pressable onPress={() => navigation.navigate(ScreenEnum.ProductDetail)}>
-        <Image source={require('../../assets/images/bottom_home.jpg')} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
+        <Image
+          source={require('../../assets/images/bottom_home.jpg')}
+          style={{width: '100%', height: '100%', resizeMode: 'cover'}}
+        />
       </Pressable>
     </SafeAreaView>
+  );
+};
 
-  )
-}
-
-export default HomeScreen
-
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
-
-})
-
-
-
-
-
-
-
-
-
+    flex: 1,
+  },
+});
