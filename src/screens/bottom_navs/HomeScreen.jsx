@@ -14,6 +14,7 @@ const HomeScreen = props => {
   const {navigation} = props;
 
   console.log('Phong test');
+  console.log('Thao test');
 
   return (
     <SafeAreaView style={styles.container}>
