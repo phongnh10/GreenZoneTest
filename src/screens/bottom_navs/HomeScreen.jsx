@@ -8,7 +8,7 @@ const HomeScreen = props => {
 
   console.log('Phong test');
   console.log('Thao test');
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <Pressable onPress={() => navigation.navigate(ScreenEnum.ProductDetail)}>
