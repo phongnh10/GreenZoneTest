@@ -15,7 +15,6 @@ const {width, height} = Dimensions.get('window');
 
 const HomeScreen = props => {
   const {navigation} = props;
-
   return (
     <SafeAreaView style={{flex: 1, flexDirection: 'column'}}>
       <Header />
