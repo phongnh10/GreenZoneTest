@@ -1,20 +1,12 @@
-import {
-  Image,
-  SafeAreaView,
-  View,
-  Text,
-  FlatList,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { Image, SafeAreaView, View, Text, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
+import HeaderWithTitleAndBadge from '../../components/headers/HeaderWithTitleAndBadge';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const HomeScreen = props => {
-  const {navigation} = props;
+  const { navigation } = props;
 
   const handleNavigateToProductDetail = () => {
     navigation.navigate(ScreenEnum.ProductDetail);
@@ -22,6 +14,11 @@ const HomeScreen = props => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <HeaderWithTitleAndBadge
+        title="Home"
+        onBadgePress={() => console.log('Click badge')}
+        isHome={true}
+      />
       <Header />
       <Body handleNavigateProductDetail={handleNavigateToProductDetail} />
     </SafeAreaView>
@@ -66,14 +63,14 @@ const Header = () => {
   );
 };
 
-const Body = ({handleNavigateToProductDetail}) => {
+const Body = ({ handleNavigateToProductDetail }) => {
   return (
     <View>
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         data={categories}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handleNavigateToProductDetail()}>
             <Item item={item} />
           </TouchableOpacity>
@@ -84,10 +81,10 @@ const Body = ({handleNavigateToProductDetail}) => {
   );
 };
 
-const Item = ({item}) => (
+const Item = ({ item }) => (
   <View style={styles.itemContainer}>
     <View style={styles.itemImageContainer}>
-      <Image style={styles.itemImage} source={{uri: item.image}} />
+      <Image style={styles.itemImage} source={{ uri: item.image }} />
     </View>
     <Text numberOfLines={2} style={styles.itemText}>
       {item.name}
