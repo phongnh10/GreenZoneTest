@@ -34,7 +34,7 @@ const MainNavigation = () => {
           } else if (route.name === ScreenEnum.MerchantStackScreen) {
             iconName = focused ? 'store' : 'store-outline';
           } else if (route.name === ScreenEnum.VoucherStackScreen) {
-            iconName = focused ? 'gift-open' : 'gift-open-outline';
+            iconName = focused ? 'gift-open' : 'gift-outline';
           } else if (route.name === ScreenEnum.ProfileStackScreen) {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
           }

@@ -5,7 +5,7 @@ import colors from '../../constants/color';
 import { Icon } from 'react-native-paper';
 
 
-const HeaderWithTitleAndBadge = (props) => {
+const HeaderWithBadge = (props) => {
   const { title, onBadgePress, isHome } = props;
   return (
     <View style={styles.header}>
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderWithTitleAndBadge;
+export default HeaderWithBadge;

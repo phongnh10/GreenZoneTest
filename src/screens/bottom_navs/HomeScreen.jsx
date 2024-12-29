@@ -1,7 +1,7 @@
 import { Image, SafeAreaView, View, Text, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
-import HeaderWithTitleAndBadge from '../../components/headers/HeaderWithTitleAndBadge';
+import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
 
 const { width } = Dimensions.get('window');
 
@@ -14,13 +14,13 @@ const HomeScreen = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithTitleAndBadge
+      <HeaderWithBadge
         title="Home"
         onBadgePress={() => console.log('Click badge')}
         isHome={true}
       />
-      <Header />
-      <Body handleNavigateProductDetail={handleNavigateToProductDetail} />
+      {/* <Header /> */}
+      {/* <Body handleNavigateProductDetail={handleNavigateToProductDetail} /> */}
     </SafeAreaView>
   );
 };
