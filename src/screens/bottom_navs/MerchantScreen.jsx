@@ -72,7 +72,6 @@ const MerchantScreen = (props) => {
     </View>
   );
 
-
   return (
 
     <SafeAreaView style={styles.container}>
