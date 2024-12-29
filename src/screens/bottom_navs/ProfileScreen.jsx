@@ -16,7 +16,7 @@ const CardItem = ({ icon, text, color }) => {
 };
 
 
-const OtherScreen = (props) => {
+const ProfileScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
 
@@ -130,7 +130,7 @@ const OtherScreen = (props) => {
   );
 };
 
-export default OtherScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   separator: {

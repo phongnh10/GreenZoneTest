@@ -1,16 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { Badge } from 'react-native-paper';
+import colors from '../../constants/color';
 
-const IconWithBadge = () => {
+const IconWithBadge = (props) => {
+    const { onPress } = props
     return (
-        <TouchableOpacity style={styles.container}>
+        <Pressable
+            onPress={onPress}
+            style={styles.container}>
             <View style={styles.button}>
                 <Feather name="bell" style={styles.icon} />
             </View>
             <Badge style={styles.badge}>13</Badge>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 
@@ -25,25 +29,25 @@ const styles = StyleSheet.create({
         width: 34,
         height: 34,
         borderRadius: 20,
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 4,
-        shadowColor: '#000',
+        shadowColor: colors.black,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
     },
     icon: {
         fontSize: 24,
-        color: 'green',
+        color: colors.primary,
     },
     badge: {
         position: 'absolute',
         top: 0,
         right: 0,
-        backgroundColor: 'red',
-        color: 'white',
+        backgroundColor: colors.red800,
+        color: colors.white,
         lineHeight: 16,
     },
 });
