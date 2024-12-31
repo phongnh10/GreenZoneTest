@@ -9,6 +9,7 @@ import ProfileStackScreen from './stacks/ProfileStackScreen';
 import VoucherStackScreen from './stacks/VoucherStackScreen';
 import MerchantStackScreen from './stacks/MerchantStackScreen';
 import OrderStackScreen from './stacks/OrderStackScreen';
+import GLOBAL_KEYS from '../constants/global_keys';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ const MainNavigation = () => {
           } else if (route.name === ScreenEnum.MerchantStackScreen) {
             iconName = focused ? 'store' : 'store-outline';
           } else if (route.name === ScreenEnum.VoucherStackScreen) {
-            iconName = focused ? 'gift-open' : 'gift-open-outline';
+            iconName = focused ? 'gift-open' : 'gift-outline';
           } else if (route.name === ScreenEnum.ProfileStackScreen) {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
           }
@@ -43,7 +44,7 @@ const MainNavigation = () => {
             <Icon
               source={iconName}
               color={focused ? colors.primary : colors.gray700}
-              size={28} 
+              size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} 
             />
           );
         },

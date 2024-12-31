@@ -1,7 +1,10 @@
-import { Image, SafeAreaView, View, Text, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, SafeAreaView, View, Text, Button, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
-import HeaderWithTitleAndBadge from '../../components/headers/HeaderWithTitleAndBadge';
+import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
+import colors from '../../constants/color';
+import LightStatusBar from '../../components/status_bars/LightStatusBar';
+
 
 const { width } = Dimensions.get('window');
 
@@ -14,54 +17,23 @@ const HomeScreen = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithTitleAndBadge
+
+      <LightStatusBar />
+      <HeaderWithBadge
         title="Home"
         onBadgePress={() => console.log('Click badge')}
         isHome={true}
       />
-      <Header />
-      <Body handleNavigateProductDetail={handleNavigateToProductDetail} />
+
+      <Button title='Open Modal' onPress={() => navigation.navigate("CustomModal")} />
+
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
 
-const Header = () => {
-  return (
-    <View style={styles.header}>
-      <View style={styles.headerLeft}>
-        <Image
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/128/5997/5997060.png',
-          }}
-          style={styles.icon}
-        />
-        <Text style={styles.headerTitle}>Danh Mục</Text>
-        <Image
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/128/15714/15714554.png',
-          }}
-          style={styles.iconSmall}
-        />
-      </View>
-      <View style={styles.headerRight}>
-        <Image
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/128/17820/17820969.png',
-          }}
-          style={[styles.icon, styles.iconMarginRight]}
-        />
-        <Image
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/128/2013/2013141.png',
-          }}
-          style={styles.icon}
-        />
-      </View>
-    </View>
-  );
-};
+
 
 const Body = ({ handleNavigateToProductDetail }) => {
   return (
@@ -142,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: colors.white
   },
   //Header
   header: {

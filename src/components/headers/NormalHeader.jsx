@@ -24,8 +24,8 @@ const NormalHeader = (props) => {
         titleStyle={styles.title}
       />
 
-      // Quyết định có show right icon hay không ?
-      {
+    
+      {  // Quyết định có show right icon hay không ?
         enableRightIcon ? (
           <Appbar.Action icon={rightIcon} onPress={onRightPress} />
         ) : (
