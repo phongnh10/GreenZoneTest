@@ -1,9 +1,10 @@
-import { StyleSheet, Image, SafeAreaView, Text, View, ScrollView , TouchableOpacity, FlatList} from 'react-native'
+import { StyleSheet, Image, SafeAreaView, Text, View, ScrollView , TouchableOpacity, FlatList, TextInput} from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Fontisto';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
+import colors from '../../constants/color';
 
 
 
@@ -75,35 +76,30 @@ const MerchantScreen = (props) => {
   return (
 
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textHeader}>Cửa hàng</Text>
-        <View style={styles.notification}>
-          <View style={styles.itemNotification}>
-            <Icon name="ticket-confirmation-outline" size={25} color="#299345" />
-          </View>
-          <View style={styles.itemNotification}>
-            <Icons name="bell" size={25} color="#299345" />
-          </View>
-        </View>
-      </View>
 
+
+
+
+      <View style={styles.content}>
 
       <View style={styles.tool}>
+
         <View style={styles.sreach}>
-           <IconFeather name="search" size={25} color="#299345" />
-           <Text style={styles.textSreach}>
-            Tìm kiếm
-           </Text>
+           <IconFeather name="search" size={25} color={colors.primary} />
+           <TextInput
+            placeholder='Tìm kiếm'
+            placeholderTextColor={colors.gray400}
+           />
         </View>
         <View style={styles.map}>
-          <IconFeather name="map-pin" size={25} color="#299345" />
+          <IconFeather name="map-pin" size={25} color={colors.primary} />
           <Text style={styles.textMap}>
             Bản đồ
           </Text>
         </View>
       </View>
 
-      <View style={styles.body}>
+      <View>
         <Text style={styles.tittle}>
             Cửa hàng gần bạn
         </Text>
@@ -127,7 +123,7 @@ const MerchantScreen = (props) => {
           style={styles.listscreen}
         />
       </View>
-      
+      </View>
 
     </SafeAreaView>
 
@@ -138,23 +134,68 @@ export default MerchantScreen
 
 
 const styles = StyleSheet.create({
-  listscreen:{
-    height: 440
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: colors.white,
   },
-  item: {
+  content:{
+    paddingHorizontal: 16,
+    marginTop: 45,
+  },
+  tool:{
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    
+    alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 12,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: '#EAE9E9',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
+    backgroundColor: colors.white,
+    paddingVertical: 8
+  },
+  sreach:{
+    width: "70%",
+    height: 42,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.green100,
+    borderRadius: 6,
+  },
+  textSreach:{
+    marginStart: 8,
+    color: colors.gray700
+  },
+  map:{
+    flexDirection: 'row',
+    
+  },
+  textMap:{
+    marginStart: 8,
+  },
+  tittle:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  distance: {
+    fontSize: 12,
+    color: colors.gray400,
+  },
+  location: {
+    fontSize: 14,
+    color: colors.gray850,
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: colors.black,
+  },
+  infoItem: {
+    flex: 1,
+    gap: 16,
+    marginStart: 10,
   },
   imageItem: {
     width: 80,
@@ -162,102 +203,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginRight: 12,
   },
-  infoItem: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  location: {
-    fontSize: 14,
-    color: '#555',
-  },
-  distance: {
-    fontSize: 12,
-    color: '#888',
-  },
 
-  body:{
-    paddingHorizontal: 20,
-  },
-
-
-  tittle:{
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  textMap:{
-    marginStart: 8,
-  },
-  map:{
+  item: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
-  },
-  textSreach:{
-    marginStart: 8,
-    color: '#666666'
-  },
-  sreach:{
-    width: 240,
-    height: 42,
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EFFDEE',
-    paddingVertical: 8,
-    borderRadius: 6,
-  },
-  tool:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    alignContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 8
-  },
-
-  textHeader:{
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
-  itemNotification: {
-   width: 40,
-    height: 40,
-    marginHorizontal: 3, 
-    backgroundColor: '#fff',
-    borderRadius: 17, 
-    justifyContent: 'center', 
-    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 12,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: colors.gray300,
+    borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 5,
+    elevation: 3,
   },
-  notification: {
-    flexDirection: 'row',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    alignContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 8
+  listscreen:{
+    height: "65%"
   },
 
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-  }
+
 
 })
 
