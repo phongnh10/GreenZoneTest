@@ -1,6 +1,6 @@
 import { StyleSheet, Image, SafeAreaView } from 'react-native'
 import { View, Text } from 'react-native';
-import NormalHeader from '../../components/headers/NormalHeader';
+
 
 
 const VoucherScreen = (props) => {
@@ -8,9 +8,9 @@ const VoucherScreen = (props) => {
   return (
 
     <SafeAreaView style={styles.container}>
-      <NormalHeader title={"Uu dai"}/>
-      <Text>Voucher Screen</Text>
 
+      <Text>Voucher Screen</Text>
+    
 
     </SafeAreaView>
 

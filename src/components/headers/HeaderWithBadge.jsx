@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import IconWithBadge from './IconWithBadge';
 import colors from '../../constants/color';
 import { Icon } from 'react-native-paper';
+import GLOBAL_KEYS from '../../constants/global_keys';
 
 
 const HeaderWithBadge = (props) => {
@@ -11,10 +12,10 @@ const HeaderWithBadge = (props) => {
     <View style={styles.header}>
 
 
-      // Kiểm tra xem có phải trang Home hay không
-      // 1. Nếu là trang Home thì đổi Header Chào user
-      // 2. Nếu không phải Home thì chỉ hiển thị Header Title
-      {
+
+      { // Kiểm tra xem có phải trang Home hay không
+        // 1. Nếu là trang Home thì đổi Header Chào user
+        // 2. Nếu không phải Home thì chỉ hiển thị Header Title
         isHome ? (
           <View style={styles.left}>
             <Image
@@ -22,7 +23,7 @@ const HeaderWithBadge = (props) => {
               style={styles.image}
             />
             <Text style={styles.title}>Chào bạn mới</Text>
-            <Icon source='hand-wave' color={colors.yellow700} size={18} />
+            <Icon source='hand-wave' color={colors.yellow700} size={GLOBAL_KEYS.ICON_SIZE_SMALL} />
           </View>
 
         ) : (
@@ -43,16 +44,16 @@ const HeaderWithBadge = (props) => {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    paddingVertical: 8,
+    paddingVertical: GLOBAL_KEYS.PADDING_SMALL,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
     width: '100%'
   },
   left: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 8,
     alignItems: 'center'
   },
   right: {
@@ -66,12 +67,10 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 24,
-    height: 24,
+    width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
+    height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
   },
-  iconWave: {
-    fontSize: 20,
-  },
+
 });
 
 export default HeaderWithBadge;

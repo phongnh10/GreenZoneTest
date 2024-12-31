@@ -5,23 +5,33 @@ import colors from '../../constants/color';
 
 
 
-const DialogSelectShippingMethod = () => {
+const DialogShippingMethod = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
     const handleOptionSelect = (option) => setSelectedOption(option);
-    const showModal = () => setIsVisible(true);
-    const hideModal = () => setIsVisible(false);
+    const showModal = () => {
+        if (!isVisible) {
+            setIsVisible(true);
+        }
+    };
+
+    const hideModal = () => {
+        if (isVisible) {
+            setIsVisible(false);
+        }
+    };
 
     const handleEdit = (option) => console.log(`Editing ${option}`);
 
     return (
         <View style={styles.container}>
             <Button title="Open Modal" onPress={showModal} />
-            <Modal visible={isVisible} animationType="slide" transparent onRequestClose={hideModal}>
+            <Modal visible={isVisible} animationType="slide" transparent={true} onRequestClose={hideModal}>
                 <View style={styles.overlay}>
                     <View style={styles.modalContainer}>
                         <View style={styles.header}>
+                            <View style={{ width: 24, height: 24, backgroundColor: colors.transparent }} ></View>
                             <Text style={styles.titleText}>Chọn phương thức đặt hàng</Text>
                             <IconButton icon="close" size={24} color={colors.black} onPress={hideModal} />
                         </View>
@@ -99,4 +109,4 @@ const styles = StyleSheet.create({
     normalText: { fontSize: 14, color: colors.gray850 },
 });
 
-export default DialogSelectShippingMethod;
+export default DialogShippingMethod;
