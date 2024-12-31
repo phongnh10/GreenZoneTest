@@ -10,6 +10,7 @@ const CustomSearchBar = (props) => {
     placeholder = "Search",
     searchQuery,
     setSearchQuery,
+    style
   } = props;
 
   return (
@@ -21,7 +22,7 @@ const CustomSearchBar = (props) => {
       clearIcon="close"
       inputStyle={styles.input}
       elevation={1}
-      style={styles.searchBar}
+      style={[styles.searchBar, style]}
     />
   );
 };
