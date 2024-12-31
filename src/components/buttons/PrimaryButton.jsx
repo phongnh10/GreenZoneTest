@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color: colors.white,
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
     },
 });
 
-export default PrimaryButton;
+export default PrimaryButton
