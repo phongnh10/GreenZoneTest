@@ -86,7 +86,9 @@ const Body = ({navigation}) => {
         data={categories}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate(ScreenEnum.ProductDetail)}>
+            onPress={() =>
+              navigation.navigate(ScreenEnum.BottomSheet, {item: item})
+            }>
             <Item item={item} />
           </TouchableOpacity>
         )}
