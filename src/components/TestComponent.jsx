@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import colors from '../constants/color';
 import FlatInput from './inputs/FlatInput';
+import OutlineInput from './inputs/OutlineInput';
+import GLOBAL_KEYS from '../constants/global_keys';
+
 
 const TestComponent = () => {
   const [fullname, setFullname] = useState('');
@@ -64,8 +67,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 16,
-    gap: 20,
+    padding: GLOBAL_KEYS.PADDING_DEFAULT,
+    gap: GLOBAL_KEYS.GAP_DEFAULT,
   },
 });
 

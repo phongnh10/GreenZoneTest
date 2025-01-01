@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import colors from '../../constants/color';
+import GLOBAL_KEYS from '../../constants/global_keys';
 
 const OutlineInput = ({ label, value, setValue, message, setIsPasswordVisible, isPasswordVisible = false, secureTextEntry = false }) => {
     return (
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: colors.red900,
-        fontSize: 12,
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
         marginTop: 4,
     },
 });

@@ -45,6 +45,7 @@ const FlatInput = ({
 
 const styles = StyleSheet.create({
     input: {
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         backgroundColor: colors.white,
         elevation: 3,
         shadowColor: colors.primary,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: colors.red900,
-        fontSize: 12,
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
         marginTop: 4,
     },
 });
