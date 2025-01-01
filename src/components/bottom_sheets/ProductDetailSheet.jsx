@@ -3,11 +3,14 @@ import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar } from 
 import { IconButton } from 'react-native-paper'; // Sử dụng IconButton từ react-native-paper
 import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
+import RadioGroup from '../RadioGroup';
 
 const ProductDetailSheet = (props) => {
     const { navigation } = props;
     const [isFavorite, setIsFavorite] = useState(false); // State để xử lý toggle yêu thích
     const [showFullDescription, setShowFullDescription] = useState(false); // State để toggle mô tả
+
+    const [selectedSize, setSelectedSize] = useState('M'); // Giá trị mặc định
 
     const hideModal = () => {
         navigation.goBack();
@@ -28,23 +31,47 @@ const ProductDetailSheet = (props) => {
         <View style={styles.modalContainer}>
             <ScrollView style={styles.modalContent}>
                 <ProductImage hideModal={hideModal} />
-                <ProductInfo 
-                    isFavorite={isFavorite} 
-                    toggleFavorite={toggleFavorite} 
+
+                <View style={styles.column}>
+                    <ProductInfo
+                        isFavorite={isFavorite}
+                        toggleFavorite={toggleFavorite}
+                    />
+
+                    <ProductDescription
+                        description={productDescription}
+                        showFullDescription={showFullDescription}
+                        toggleDescription={toggleDescription}
+                    />
+
+                    <Text style={styles.title} >Size
+                        <Text style={styles.redText}>*</Text>
+                    </Text>
+
+                    <RadioGroup
+                    data={sizes}
+                    selectedValue={selectedSize}
+                    onChange={newValue => setSelectedSize(newValue)}
+                    labelExtractor={item => item.label} // Lấy nhãn từ mỗi item
+                    valueExtractor={item => item.value} // Lấy giá trị từ mỗi item
+                    additionalInfoExtractor={item => item.price} // Lấy giá tiền
+                    renderAdditionalInfo={price => <Text style={styles.price}>${price}</Text>} // Hiển thị giá
                 />
-                <ProductDescription 
-                    description={productDescription} 
-                    showFullDescription={showFullDescription} 
-                    toggleDescription={toggleDescription} 
-                />
-                <ProductPrice />
-                <ActionButtons />
+                </View>
+              
+
             </ScrollView>
         </View>
     );
 };
 
-// Component cho Image
+const sizes = [
+    { label: 'S', value: 'S', price: 10 },
+    { label: 'M', value: 'M', price: 15 },
+    { label: 'L', value: 'L', price: 20 },
+    { label: 'XL', value: 'XL', price: 25 },
+];
+
 const ProductImage = ({ hideModal }) => (
     <View style={styles.imageContainer}>
         <Image
@@ -63,7 +90,6 @@ const ProductImage = ({ hideModal }) => (
     </View>
 );
 
-// Component cho tên sản phẩm và nút yêu thích
 const ProductInfo = ({ isFavorite, toggleFavorite }) => (
     <View style={styles.horizontalView}>
         <Text
@@ -82,7 +108,6 @@ const ProductInfo = ({ isFavorite, toggleFavorite }) => (
     </View>
 );
 
-// Component cho mô tả sản phẩm
 const ProductDescription = ({ description, showFullDescription, toggleDescription }) => (
     <View style={styles.descriptionContainer}>
         <Text
@@ -100,28 +125,9 @@ const ProductDescription = ({ description, showFullDescription, toggleDescriptio
     </View>
 );
 
-// Component cho giá sản phẩm
-const ProductPrice = () => (
-    <View style={styles.priceContainer}>
-        <Text style={styles.productPrice}>100.000 ₫</Text>
-    </View>
-);
-
-// Component cho các nút hành động
-const ActionButtons = () => (
-    <View style={styles.actionsContainer}>
-        <Pressable style={styles.addToCartButton}>
-            <Text style={styles.actionButtonText}>Thêm vào giỏ hàng</Text>
-        </Pressable>
-        <Pressable style={styles.buyNowButton}>
-            <Text style={styles.actionButtonText}>Mua ngay</Text>
-        </Pressable>
-    </View>
-);
-
 const styles = StyleSheet.create({
     modalContainer: {
-        backgroundColor: colors.overlay,
+        backgroundColor: colors.white,
         flex: 1,
         width: '100%',
         marginTop: StatusBar.currentHeight + 40
@@ -135,6 +141,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
+
     },
     imageContainer: {
         position: 'relative',
@@ -155,8 +162,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 4,
-        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
+        paddingVertical: 4
+    },
+    column: {
+        flexDirection: 'column',
+        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT
     },
     productName: {
         fontSize: 18,
@@ -164,57 +174,38 @@ const styles = StyleSheet.create({
         color: colors.black,
         flex: 1,
         marginRight: 8,
-        lineHeight: 22,
+        lineHeight: GLOBAL_KEYS.LIGHT_HEIGHT_DEFAULT,
     },
     descriptionContainer: {
-        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-        gap: 5,
+        gap: 8,
     },
     descriptionText: {
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         color: colors.gray700,
-        lineHeight: 22,
+        lineHeight: GLOBAL_KEYS.LIGHT_HEIGHT_DEFAULT,
+    },
+    title: {
+        fontWeight: 'bold'
     },
     textButton: {
         alignSelf: 'flex-start',
         paddingVertical: 4,
     },
+    redText: {
+        color: colors.red800
+    },
     textButtonLabel: {
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         color: colors.teal900,
     },
-    priceContainer: {
-        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-        marginTop: 10,
-    },
-    productPrice: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: colors.red600,
-    },
-    actionsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-        marginTop: 16,
-    },
-    addToCartButton: {
-        backgroundColor: colors.green500,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    },
-    buyNowButton: {
-        backgroundColor: colors.blue500,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    },
-    actionButtonText: {
-        color: colors.white,
+    price: {
+        color: 'black',
         fontSize: 16,
-        fontWeight: 'bold',
-        textAlign: 'center',
+    },
+    selectedSize: {
+        color: 'black',
+        marginTop: 10,
+        fontSize: 16,
     },
 });
 
