@@ -10,7 +10,7 @@ const screens = {
   OrderScreen: 'OrderScreen',
   MerchantScreen: 'MerchantScreen',
   VoucherScreen: 'VoucherScreen',
-  OtherScreen: 'OtherScreen',
+  ProfileScreen: 'ProfileScreen',
 
   // bottom_navs_stack
   HomeStackScreen: 'HomeStackScreen',
@@ -19,7 +19,12 @@ const screens = {
   VoucherStackScreen: 'VoucherStackScreen',
   OtherStackScreen: 'OtherStackScreen',
 
-  // bottom - sheet
+  // bottom_navs_stack
+  HomeStackScreen: 'HomeStackScreen',
+  OrderStackScreen: 'OrderStackScreen',
+  MerchantStackScreen: 'MerchantStackScreen',
+  VoucherStackScreen: 'VoucherStackScreen',
+  ProfileStackScreen: 'ProfileStackScreen',
   BottomSheet: 'BottomSheet',
 };
 
