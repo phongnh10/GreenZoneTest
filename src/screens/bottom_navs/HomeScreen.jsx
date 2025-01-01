@@ -16,10 +16,13 @@ const {width} = Dimensions.get('window');
 const HomeScreen = props => {
   const {navigation} = props;
 
+<<<<<<< HEAD
   const handleNavigateToProductDetail = () => {
     navigation.navigate(ScreenEnum.ProductDetail);
   };
 
+=======
+>>>>>>> develop
   return (
     <SafeAreaView style={styles.container}>
       <Header />
