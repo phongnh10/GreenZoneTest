@@ -92,7 +92,11 @@ const ProfileScreen = props => {
         <View style={styles.support}>
           <TouchableOpacity
             style={styles.item}
+<<<<<<< Updated upstream
             onPress={() => navigation.navigate('UpdateProfileScreen')}>
+=======
+            onPress={navigation.navigate('UpdateProfileScreen')}>
+>>>>>>> Stashed changes
             <View style={styles.leftSection}>
               <Icon name="account-outline" size={24} color="#000" />
               <Text style={styles.title}>Thông tin cá nhân</Text>
