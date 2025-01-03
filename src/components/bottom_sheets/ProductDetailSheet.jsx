@@ -5,6 +5,7 @@ import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
 import RadioGroup from '../radio/RadioGroup';
 import OverlayStatusBar from '../status_bars/OverlayStatusBar';
+import SelectableGroup from '../radio/SelectableGroup';
 
 
 
@@ -55,8 +56,10 @@ const ProductDetailSheet = (props) => {
                     toggleDescription={toggleDescription}
                 />
 
-
-
+                <SelectableGroup
+                    title='Chọn topping'
+                    note="Tối đa 3 toppings"
+                    items={toppings} />
 
                 <RadioGroup
                     items={sizes}
@@ -69,21 +72,23 @@ const ProductDetailSheet = (props) => {
 
 
 
-                <RadioGroup
+                {/* <RadioGroup
                     items={sugarLevels}
                     selectedValue={selectedSugarLevel}
                     onValueChange={setSelectedSugarLevel}
                     title="Chọn mức đường"
                     required={true}
-                />
+                /> */}
 
-                <RadioGroup
+                {/* <RadioGroup
                     items={iceLevels}
                     selectedValue={selectedIceLevel}
                     onValueChange={setSelectedIceLevel}
                     title="Chọn mức đá"
                     required={true}
-                />
+                /> */}
+
+
 
 
 
@@ -93,6 +98,8 @@ const ProductDetailSheet = (props) => {
         </View>
     );
 };
+
+
 
 const sizes = [
     { label: 'S', value: 'S', additionalInfo: '10000đ' },
@@ -110,6 +117,45 @@ const iceLevels = [
     { label: '100%', value: '100%' },
     { label: '50%', value: '50%' }
 ];
+const toppings = [
+    {
+        label: "Trân châu đen",
+        quantity: 0,
+        additionalInfo: "5,000đ",
+        selected: false,
+    },
+    {
+        label: "Thạch dừa",
+        quantity: 0,
+        additionalInfo: "7,000đ",
+        selected: false,
+    },
+    {
+        label: "Kem cheese",
+        quantity: 0,
+        additionalInfo: "10,000đ",
+        selected: false,
+    },
+    {
+        label: "Hạt dẻ",
+        quantity: 0,
+        additionalInfo: "8,000đ",
+        selected: false,
+    },
+    {
+        label: "Sương sáo",
+        quantity: 0,
+        additionalInfo: "6,000đ",
+        selected: false,
+    },
+    {
+        label: "Trân châu trắng",
+        quantity: 0,
+        additionalInfo: "7,000đ",
+        selected: false,
+    },
+];
+
 
 const ProductImage = ({ hideModal }) => (
     <View style={styles.imageContainer}>
@@ -125,7 +171,7 @@ const ProductImage = ({ hideModal }) => (
         <IconButton
             icon="close"
             size={GLOBAL_KEYS.ICON_SIZE_SMALL}
-            color={colors.white}
+            iconColor={colors.primary}
             style={styles.closeButton}
             onPress={hideModal}
         />
@@ -178,8 +224,9 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: colors.white,
         flexDirection: 'column',
-        gap: 5,
-        marginTop: StatusBar.currentHeight + 40
+        gap: GLOBAL_KEYS.GAP_SMALL,
+        marginTop: StatusBar.currentHeight + 40,
+        flexDirection: 'column'
     },
     imageContainer: {
         position: 'relative',
@@ -251,7 +298,15 @@ const styles = StyleSheet.create({
 
     radioGroup: {
         paddingHorizontal: GLOBAL_KEYS.PADDING_SMALL
-    }
+    },
+    toppingList: {
+        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
+        gap: GLOBAL_KEYS.GAP_SMALL,
+        flexDirection: 'column'
+    },
+    toppingItem: {
+        marginBottom: GLOBAL_KEYS.PADDING_SMALL, // Thêm khoảng cách giữa các topping items
+    },
 });
 
 export default ProductDetailSheet;

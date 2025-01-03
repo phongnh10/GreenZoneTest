@@ -4,6 +4,7 @@ import RadioButton from './RadioButton';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
 
+
 const RadioGroup = ({
   items,
   selectedValue,
@@ -55,9 +56,13 @@ const styles = StyleSheet.create({
     color: colors.red800,
   },
   note: {
-    fontSize: 14,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     fontWeight: '400',
-  },
+  }
 });
 
+
+
+
 export default RadioGroup;
+
