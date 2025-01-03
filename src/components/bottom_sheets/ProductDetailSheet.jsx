@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar } from 'react-native';
-import { IconButton } from 'react-native-paper'; // Sử dụng IconButton từ react-native-paper
+import { IconButton } from 'react-native-paper';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
-import RadioGroup from '../RadioGroup';
+import RadioGroup from '../radio/RadioGroup';
+import OverlayStatusBar from '../status_bars/OverlayStatusBar';
+
+
+
 
 const ProductDetailSheet = (props) => {
+
     const { navigation } = props;
     const [isFavorite, setIsFavorite] = useState(false); // State để xử lý toggle yêu thích
     const [showFullDescription, setShowFullDescription] = useState(false); // State để toggle mô tả
 
-    const [selectedSize, setSelectedSize] = useState('M'); // Giá trị mặc định
+    const [selectedSize, setSelectedSize] = useState(sizes[0].value); // Giá trị mặc định
+    const [selectedSugarLevel, setSelectedSugarLevel] = useState(sugarLevels[0].value); // Giá trị mặc định
+    const [selectedIceLevel, setSelectedIceLevel] = useState(iceLevels[0].value); // Giá trị mặc định
+
 
     const hideModal = () => {
         navigation.goBack();
     };
 
     const toggleFavorite = () => {
-        setIsFavorite(!isFavorite); // Đổi trạng thái yêu thích
+        setIsFavorite(!isFavorite);
     };
 
+
+    {/** Hàm Ẩn / Hiện mô tả sản phẩm */ }
     const toggleDescription = () => {
-        setShowFullDescription(!showFullDescription); // Toggle mô tả
+        setShowFullDescription(!showFullDescription);
     };
 
     const productDescription =
@@ -29,36 +39,55 @@ const ProductDetailSheet = (props) => {
 
     return (
         <View style={styles.modalContainer}>
+            <OverlayStatusBar />
             <ScrollView style={styles.modalContent}>
                 <ProductImage hideModal={hideModal} />
 
-                <View style={styles.column}>
-                    <ProductInfo
-                        isFavorite={isFavorite}
-                        toggleFavorite={toggleFavorite}
-                    />
 
-                    <ProductDescription
-                        description={productDescription}
-                        showFullDescription={showFullDescription}
-                        toggleDescription={toggleDescription}
-                    />
-
-                    <Text style={styles.title} >Size
-                        <Text style={styles.redText}>*</Text>
-                    </Text>
-
-                    <RadioGroup
-                    data={sizes}
-                    selectedValue={selectedSize}
-                    onChange={newValue => setSelectedSize(newValue)}
-                    labelExtractor={item => item.label} // Lấy nhãn từ mỗi item
-                    valueExtractor={item => item.value} // Lấy giá trị từ mỗi item
-                    additionalInfoExtractor={item => item.price} // Lấy giá tiền
-                    renderAdditionalInfo={price => <Text style={styles.price}>${price}</Text>} // Hiển thị giá
+                <ProductInfo
+                    isFavorite={isFavorite}
+                    toggleFavorite={toggleFavorite}
                 />
-                </View>
-              
+
+                <ProductDescription
+                    description={productDescription}
+                    showFullDescription={showFullDescription}
+                    toggleDescription={toggleDescription}
+                />
+
+
+
+
+                <RadioGroup
+                    items={sizes}
+                    selectedValue={selectedSize}
+                    onValueChange={setSelectedSize}
+                    title="Size"
+                    required={true}
+                    note="Bắt buộc"
+                />
+
+
+
+                <RadioGroup
+                    items={sugarLevels}
+                    selectedValue={selectedSugarLevel}
+                    onValueChange={setSelectedSugarLevel}
+                    title="Chọn mức đường"
+                    required={true}
+                />
+
+                <RadioGroup
+                    items={iceLevels}
+                    selectedValue={selectedIceLevel}
+                    onValueChange={setSelectedIceLevel}
+                    title="Chọn mức đá"
+                    required={true}
+                />
+
+
+
+
 
             </ScrollView>
         </View>
@@ -66,19 +95,32 @@ const ProductDetailSheet = (props) => {
 };
 
 const sizes = [
-    { label: 'S', value: 'S', price: 10 },
-    { label: 'M', value: 'M', price: 15 },
-    { label: 'L', value: 'L', price: 20 },
-    { label: 'XL', value: 'XL', price: 25 },
+    { label: 'S', value: 'S', additionalInfo: '10000đ' },
+    { label: 'M', value: 'M', additionalInfo: '15000đ' },
+    { label: 'L', value: 'L', additionalInfo: '20000đ' },
+    { label: 'XL', value: 'XL', additionalInfo: '25000đ' },
+];
+
+const sugarLevels = [
+    { label: 'Ngọt bình thường', value: 'Ngọt bình thường' },
+    { label: 'Ít ngọt', value: 'Ít ngọt' }
+];
+
+const iceLevels = [
+    { label: '100%', value: '100%' },
+    { label: '50%', value: '50%' }
 ];
 
 const ProductImage = ({ hideModal }) => (
     <View style={styles.imageContainer}>
         <Image
-            source={require('../../assets/images/product1.png')} // Thay thế bằng URL ảnh sản phẩm
+            source={require('../../assets/images/product1.png')}
             style={styles.productImage}
-            resizeMode="cover"
-            onError={() => console.error('Failed to load image')}
+
+            onError={() =>
+                // Set placeholder cho image
+                console.error('Failed to load image')
+            }
         />
         <IconButton
             icon="close"
@@ -127,21 +169,17 @@ const ProductDescription = ({ description, showFullDescription, toggleDescriptio
 
 const styles = StyleSheet.create({
     modalContainer: {
-        backgroundColor: colors.white,
+        backgroundColor: colors.overlay,
         flex: 1,
         width: '100%',
-        marginTop: StatusBar.currentHeight + 40
+
     },
     modalContent: {
         width: '100%',
         backgroundColor: colors.white,
-        borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-        shadowColor: colors.black,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 5,
-
+        flexDirection: 'column',
+        gap: 5,
+        marginTop: StatusBar.currentHeight + 40
     },
     imageContainer: {
         position: 'relative',
@@ -151,6 +189,7 @@ const styles = StyleSheet.create({
     productImage: {
         width: '100%',
         height: '100%',
+        resizeMode: 'stretch'
     },
     closeButton: {
         position: 'absolute',
@@ -162,7 +201,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 4
+        paddingVertical: 4,
+        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT
     },
     column: {
         flexDirection: 'column',
@@ -177,7 +217,7 @@ const styles = StyleSheet.create({
         lineHeight: GLOBAL_KEYS.LIGHT_HEIGHT_DEFAULT,
     },
     descriptionContainer: {
-        gap: 8,
+        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT
     },
     descriptionText: {
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
@@ -185,7 +225,8 @@ const styles = StyleSheet.create({
         lineHeight: GLOBAL_KEYS.LIGHT_HEIGHT_DEFAULT,
     },
     title: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT
     },
     textButton: {
         alignSelf: 'flex-start',
@@ -207,6 +248,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 16,
     },
+
+    radioGroup: {
+        paddingHorizontal: GLOBAL_KEYS.PADDING_SMALL
+    }
 });
 
 export default ProductDetailSheet;
