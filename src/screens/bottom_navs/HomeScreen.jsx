@@ -15,6 +15,7 @@ import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
 import colors from '../../constants/color';
 import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import OverlayStatusBar from '../../components/status_bars/OverlayStatusBar';
+import CategoryScreen from '../../components/category/CategoryScreen';
 
 const {width} = Dimensions.get('window');
 
@@ -29,6 +30,8 @@ const HomeScreen = props => {
         onBadgePress={() => console.log('Click badge')}
         isHome={true}
       />
+
+      <CategoryScreen />
 
       <Button
         title="Open Modal"
