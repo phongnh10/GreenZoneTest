@@ -21,8 +21,6 @@ const NormalHeader = props => {
         color={colors.black}
       />
 
-      <Appbar.Content title={title} titleStyle={styles.title} />
-
       {
         // Quyết định có show right icon hay không ?
         enableRightIcon ? (
