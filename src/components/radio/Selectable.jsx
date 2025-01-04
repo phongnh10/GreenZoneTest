@@ -1,48 +1,48 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, StatusBar, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Pressable} from 'react-native';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import Feather from 'react-native-vector-icons/Feather';
 
 const Selectable = ({
   item,
-  initialQuantity = 0,
+  quantity,
   selected,
-  addToGroup,
-  removeFromGroup
+  handlePlus,
+  handleMinus,
+
 }) => {
 
-
-  const [quantity, setQuantity] = useState(initialQuantity);
   const activeColor = selected ? colors.primary : colors.gray400;
   const textColor = selected ? colors.primary : colors.black;
 
-  const handlePressPlus = () => {
-    addToGroup(item)
-    setQuantity(prevQuantity => prevQuantity + 1);
-  };
-
-  const handlePressMinus = () => {
-    if (quantity > 1) {
-      setQuantity(prevQuantity => prevQuantity - 1);
-    } else {
-      removeFromGroup(item)
-      setQuantity(0);
-    }
-  };
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
         {!selected ? (
-          QuantityButton('plus', handlePressPlus, activeColor, activeColor)
-        ) : (
-          <View style={styles.row}>
-            {QuantityButton('minus', handlePressMinus, activeColor, activeColor)}
-            <Text style={[styles.quantityText, { color: textColor }]}>{quantity}</Text>
-            {QuantityButton('plus', handlePressPlus, activeColor, activeColor)}
-          </View>
-        )}
+          < QuantityButton
+            iconName='plus'
+            onPress={() => { handlePlus(item) }}
+            activeColor={activeColor} />
+        )
+          : (
+            <View style={styles.row}>
+              <QuantityButton
+                iconName='minus'
+                onPress={() => handleMinus(item)}
+                activeColor={activeColor}
+              />
+              <Text style={[styles.quantityText, { color: activeColor }]}>
+                {quantity}
+              </Text>
+              <QuantityButton
+                iconName='plus'
+                onPress={() => handlePlus(item)}
+                activeColor={activeColor}
+              />
+            </View>
+          )}
         <Text style={[styles.label, { color: textColor }]}>{item.name}</Text>
       </View>
 
@@ -53,10 +53,10 @@ const Selectable = ({
   );
 };
 
-const QuantityButton = (iconName, onPress, borderColor, iconColor) => (
+const QuantityButton = ({ iconName, onPress, activeColor }) => (
   <Pressable onPress={onPress}>
-    <View style={[styles.circleWrapper, { borderColor }]}>
-      <Feather name={iconName} color={iconColor} size={18} />
+    <View style={[styles.circleWrapper, { borderColor: activeColor }]}>
+      <Feather name={iconName} color={activeColor} size={18} />
     </View>
   </Pressable>
 );

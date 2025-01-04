@@ -10,6 +10,7 @@ import SelectableGroup from '../radio/SelectableGroup';
 
 
 
+
 const ProductDetailSheet = (props) => {
 
     const { navigation } = props;
@@ -19,10 +20,10 @@ const ProductDetailSheet = (props) => {
     const [selectedSize, setSelectedSize] = useState(''); // Giá trị mặc định
     const [selectedSugarLevel, setSelectedSugarLevel] = useState(''); // Giá trị mặc định
     const [selectedIceLevel, setSelectedIceLevel] = useState(''); // Giá trị mặc định
-    const [group, setGroup] = useState([]); // Giá trị mặc định
-    // group = [{id: 1. quantity: 2}, {id: 2, quantity: 1}]
+    const [selectedGroup, setSelectedGroup] = useState([]); // Giá trị mặc định
+    // selectedGroup = [{id: 1. quantity: 2}, {id: 2, quantity: 1}]
 
-    console.log('group', group)
+    console.log('selectedGroup', selectedGroup)
 
 
     const hideModal = () => {
@@ -63,19 +64,11 @@ const ProductDetailSheet = (props) => {
                 <SelectableGroup
                     items={product.toppings}
                     title='Chọn topping'
-                    group={group}
-                    addToGroup={(itemToAdd) => {
-                        if(!group.find(item => {return item.id === itemToAdd.id})){
-                            setGroup([...group, itemToAdd])
-                        }
-                    }}
-                    removeFromGroup={(itemToRemove) => {
-                        setGroup(preGroup => {
-                            return preGroup.filter(item => { return item.id !== itemToRemove.id })
-                        })
-                    }}
+                    selectedGroup={selectedGroup}
+                    setSelectedGroup={setSelectedGroup}
                     note="Tối đa 3 toppings"
                 />
+
 
                 {/* <RadioGroup
                     items={product.sizes}
@@ -147,6 +140,9 @@ const product = {
     ],
     isFavorite: false,
 };
+
+
+
 
 
 
