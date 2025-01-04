@@ -4,47 +4,9 @@ import {Dimensions} from 'react-native';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
 
-const {width} = Dimensions.get('window');
+const width = Dimensions.get('window').width;
 
-const CategoryScreen = () => {
-  const categories = [
-    {
-      id: 1,
-      name: 'Món Mới Phải Thử',
-      image: require('../../assets/images/image_category/image_cake.png'),
-    },
-    {
-      id: 2,
-      name: 'Trà trái cây',
-      image: require('../../assets/images/image_category/image_fruit_tea.png'),
-    },
-    {
-      id: 3,
-      name: 'Trà Xanh',
-      image: require('../../assets/images/image_category/image_green_tea.png'),
-    },
-    {
-      id: 4,
-      name: 'Cafe',
-      image: require('../../assets/images/image_category/image_coffee.png'),
-    },
-    {
-      id: 5,
-      name: 'Trà Sữa',
-      image: require('../../assets/images/image_category/image_milk_tea.png'),
-    },
-    {
-      id: 6,
-      name: 'Bánh Ngọt',
-      image: require('../../assets/images/image_category/image_cake.png'),
-    },
-    {
-      id: 7,
-      name: 'Món Ngon',
-      image: require('../../assets/images/image_category/image_delicious_food.png'),
-    },
-  ];
-
+const CategoryMenu = () => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -60,7 +22,6 @@ const CategoryScreen = () => {
             </Text>
           </View>
         )}
-        contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
         scrollEnabled={false}
         numColumns={4}
@@ -73,25 +34,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
   },
-  listContainer: {},
   itemContainer: {
     alignItems: 'center',
     marginBottom: GLOBAL_KEYS.GAP_SMALL,
-    width: width / 4,
+    maxWidth: width / 4,
+    flex: 1,
   },
   imageContainer: {
     borderRadius: 34,
     backgroundColor: colors.green100,
-    padding: 16,
+    padding: GLOBAL_KEYS.PADDING_DEFAULT,
   },
   image: {
     width: 34,
     height: 34,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     borderRadius: 34,
   },
   itemName: {
-    fontSize: 12,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
     color: colors.black,
     marginTop: GLOBAL_KEYS.GAP_SMALL,
     textAlign: 'center',
@@ -99,4 +60,42 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryScreen;
+const categories = [
+  {
+    id: 1,
+    name: 'Món Mới Phải Thử',
+    image: require('../../assets/images/image_category/image_new_dish.png'),
+  },
+  {
+    id: 2,
+    name: 'Trà trái cây',
+    image: require('../../assets/images/image_category/image_fruit_tea.png'),
+  },
+  {
+    id: 3,
+    name: 'Trà Xanh',
+    image: require('../../assets/images/image_category/image_green_tea.png'),
+  },
+  {
+    id: 4,
+    name: 'Cafe',
+    image: require('../../assets/images/image_category/image_coffee.png'),
+  },
+  {
+    id: 5,
+    name: 'Trà Sữa',
+    image: require('../../assets/images/image_category/image_milk_tea.png'),
+  },
+  {
+    id: 6,
+    name: 'Bánh Ngọt',
+    image: require('../../assets/images/image_category/image_cake.png'),
+  },
+  {
+    id: 7,
+    name: 'Món Ngon',
+    image: require('../../assets/images/image_category/image_delicious_food.png'),
+  },
+];
+
+export default CategoryMenu;
