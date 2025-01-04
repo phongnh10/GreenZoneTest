@@ -5,38 +5,36 @@ import GLOBAL_KEYS from '../../constants/global_keys';
 import Feather from 'react-native-vector-icons/Feather';
 
 const Selectable = ({
-  label,
+  item,
   initialQuantity = 0,
   selected,
-  additionalInfo,
-  onPressPlus = () => { },
-  key
+  addToGroup,
+  removeFromGroup
 }) => {
-  console.log(Dimensions.get('window').width)
-  const [isSelected, setIsSelected] = useState(false);
+
+
   const [quantity, setQuantity] = useState(initialQuantity);
-  const activeColor = isSelected ? colors.primary : colors.gray400;
-  const textColor = isSelected ? colors.primary : colors.black;
+  const activeColor = selected ? colors.primary : colors.gray400;
+  const textColor = selected ? colors.primary : colors.black;
 
   const handlePressPlus = () => {
-    setIsSelected(true);
+    addToGroup(item)
     setQuantity(prevQuantity => prevQuantity + 1);
-    onPressPlus();
   };
 
   const handlePressMinus = () => {
     if (quantity > 1) {
       setQuantity(prevQuantity => prevQuantity - 1);
     } else {
-      setIsSelected(false);
+      removeFromGroup(item)
       setQuantity(0);
     }
   };
 
   return (
-    <View key={key} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.row}>
-        {!isSelected ? (
+        {!selected ? (
           QuantityButton('plus', handlePressPlus, activeColor, activeColor)
         ) : (
           <View style={styles.row}>
@@ -45,11 +43,11 @@ const Selectable = ({
             {QuantityButton('plus', handlePressPlus, activeColor, activeColor)}
           </View>
         )}
-        <Text style={[styles.label, { color: textColor }]}>{label}</Text>
+        <Text style={[styles.label, { color: textColor }]}>{item.name}</Text>
       </View>
 
-      {additionalInfo && (
-        <Text style={[styles.additionalInfo, { color: textColor }]}>{additionalInfo}</Text>
+      {item.price && (
+        <Text style={[styles.price, { color: textColor }]}>{item.price}</Text>
       )}
     </View>
   );
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     marginLeft: GLOBAL_KEYS.PADDING_SMALL,
   },
-  additionalInfo: {
+  price: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
   },
   quantityText: {

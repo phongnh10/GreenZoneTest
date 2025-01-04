@@ -6,8 +6,8 @@ import GLOBAL_KEYS from '../../constants/global_keys';
 const RadioButton = ({
     label,
     selected,
-    additionalInfo,
     onPress,
+    price
 }) => {
     const radioColor = selected ? colors.primary : colors.gray700
     const textColor = selected ? colors.primary : colors.black
@@ -25,9 +25,9 @@ const RadioButton = ({
 
             {/* Thông tin thêm */}
 
-            {additionalInfo && (
-                <Text style={[styles.additionalInfo, { color: textColor }]}>
-                    {additionalInfo}
+            {price && (
+                <Text style={[styles.price, { color: textColor }]}>
+                    {price}
                 </Text>
             )}
         </Pressable>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         flex: 1
     },
-    additionalInfo: {
+    price: {
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     },
 });

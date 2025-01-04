@@ -7,10 +7,13 @@ import Selectable from './Selectable';
 
 
 const SelectableGroup = ({
+    items,
     title = "Default title",
+    group = [],
+    addToGroup,
+    removeFromGroup,
     required = false,
     note,
-    items,
 }) => {
     return (
         <View style={styles.container}>
@@ -20,14 +23,17 @@ const SelectableGroup = ({
                 {required && <Text style={styles.redText}>*</Text>}
                 {note && <Text style={styles.note}> ({note})</Text>}
             </Text>
-            {items.map((item, index) => {
-                const { label, quantity, additionalInfo } = item;
+            {items.map(item => {
+
+
                 return (
                     <Selectable
-                        additionalInfo={additionalInfo}
-                        quantity={quantity}
-                        label={label}
-                        key={index}
+                        item={item}
+                        selected={group.includes(item)}
+                        addToGroup={addToGroup}
+                        removeFromGroup={removeFromGroup}
+                        key={item.id}
+
                     />
                 );
             })}

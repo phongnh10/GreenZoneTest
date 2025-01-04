@@ -16,9 +16,13 @@ const ProductDetailSheet = (props) => {
     const [isFavorite, setIsFavorite] = useState(false); // State để xử lý toggle yêu thích
     const [showFullDescription, setShowFullDescription] = useState(false); // State để toggle mô tả
 
-    const [selectedSize, setSelectedSize] = useState(sizes[0].value); // Giá trị mặc định
-    const [selectedSugarLevel, setSelectedSugarLevel] = useState(sugarLevels[0].value); // Giá trị mặc định
-    const [selectedIceLevel, setSelectedIceLevel] = useState(iceLevels[0].value); // Giá trị mặc định
+    const [selectedSize, setSelectedSize] = useState(''); // Giá trị mặc định
+    const [selectedSugarLevel, setSelectedSugarLevel] = useState(''); // Giá trị mặc định
+    const [selectedIceLevel, setSelectedIceLevel] = useState(''); // Giá trị mặc định
+    const [group, setGroup] = useState([]); // Giá trị mặc định
+    // group = [{id: 1. quantity: 2}, {id: 2, quantity: 1}]
+
+    console.log('group', group)
 
 
     const hideModal = () => {
@@ -57,18 +61,30 @@ const ProductDetailSheet = (props) => {
                 />
 
                 <SelectableGroup
+                    items={product.toppings}
                     title='Chọn topping'
+                    group={group}
+                    addToGroup={(itemToAdd) => {
+                        if(!group.find(item => {return item.id === itemToAdd.id})){
+                            setGroup([...group, itemToAdd])
+                        }
+                    }}
+                    removeFromGroup={(itemToRemove) => {
+                        setGroup(preGroup => {
+                            return preGroup.filter(item => { return item.id !== itemToRemove.id })
+                        })
+                    }}
                     note="Tối đa 3 toppings"
-                    items={toppings} />
+                />
 
-                <RadioGroup
-                    items={sizes}
+                {/* <RadioGroup
+                    items={product.sizes}
                     selectedValue={selectedSize}
                     onValueChange={setSelectedSize}
                     title="Size"
                     required={true}
                     note="Bắt buộc"
-                />
+                /> */}
 
 
 
@@ -81,7 +97,7 @@ const ProductDetailSheet = (props) => {
                 /> */}
 
                 {/* <RadioGroup
-                    items={iceLevels}
+                    items={product.iceLevels}
                     selectedValue={selectedIceLevel}
                     onValueChange={setSelectedIceLevel}
                     title="Chọn mức đá"
@@ -101,60 +117,39 @@ const ProductDetailSheet = (props) => {
 
 
 
-const sizes = [
-    { label: 'S', value: 'S', additionalInfo: '10000đ' },
-    { label: 'M', value: 'M', additionalInfo: '15000đ' },
-    { label: 'L', value: 'L', additionalInfo: '20000đ' },
-    { label: 'XL', value: 'XL', additionalInfo: '25000đ' },
-];
+const product = {
+    id: '1',
+    name: 'Trà Sữa Trân Châu Hoàng Kim',
+    description: 'Trà Sữa Trân Châu Hoàng Kim là một thức uống được yêu thích với vị ngọt vừa phải.',
+    image: require('../../assets/images/product1.png'),
+    sizes: [
+        { id: 'S', name: 'S', price: 10000, discount: 500, available: true },
+        { id: 'M', name: 'M', price: 15000, discount: 1000, available: true },
+        { id: 'L', name: 'L', price: 20000, discount: 1500, available: false },
+    ],
+    toppings: [
+        { id: '1', name: 'Trân châu đen', price: 5000 },
+        { id: '2', name: 'Thạch dừa', price: 7000 },
+        { id: '3', name: 'Kem cheese', price: 10000 },
+        { id: '4', name: 'Hạt dẻ', price: 8000 },
+        { id: '5', name: 'Sương sáo', price: 6000 },
+        { id: '6', name: 'Trân châu trắng', price: 7000 },
+    ],
+    iceLevels: [
+        { id: '1', name: '100% đá', value: '100%' },
+        { id: '2', name: '50% đá', value: '50%' },
+        { id: '3', name: 'Không đá', value: '0%' },
+    ],
+    sugarLevels: [
+        { id: '1', name: 'Ngọt bình thường', value: '100%' },
+        { id: '2', name: 'Ít ngọt', value: '50%' },
+        { id: '3', name: 'Không đường', value: '0%' },
+    ],
+    isFavorite: false,
+};
 
-const sugarLevels = [
-    { label: 'Ngọt bình thường', value: 'Ngọt bình thường' },
-    { label: 'Ít ngọt', value: 'Ít ngọt' }
-];
 
-const iceLevels = [
-    { label: '100%', value: '100%' },
-    { label: '50%', value: '50%' }
-];
-const toppings = [
-    {
-        label: "Trân châu đen",
-        quantity: 0,
-        additionalInfo: "5,000đ",
-        selected: false,
-    },
-    {
-        label: "Thạch dừa",
-        quantity: 0,
-        additionalInfo: "7,000đ",
-        selected: false,
-    },
-    {
-        label: "Kem cheese",
-        quantity: 0,
-        additionalInfo: "10,000đ",
-        selected: false,
-    },
-    {
-        label: "Hạt dẻ",
-        quantity: 0,
-        additionalInfo: "8,000đ",
-        selected: false,
-    },
-    {
-        label: "Sương sáo",
-        quantity: 0,
-        additionalInfo: "6,000đ",
-        selected: false,
-    },
-    {
-        label: "Trân châu trắng",
-        quantity: 0,
-        additionalInfo: "7,000đ",
-        selected: false,
-    },
-];
+
 
 
 const ProductImage = ({ hideModal }) => (

@@ -26,15 +26,15 @@ const RadioGroup = ({
 
       {/* Danh sách Radio Buttons */}
       {items.map((item) => {
-        const { value, label, additionalInfo } = item;
+        const { id, name, price } = item;
 
         return (
           <RadioButton
-            key={value}
-            label={label}
-            selected={selectedValue === value}
-            onPress={() => onValueChange(value)}
-            additionalInfo={additionalInfo}
+            key={id}
+            label={name}
+            selected={selectedValue === id}
+            onPress={() => onValueChange(id)}
+            price={price}
           />
         );
       })}
