@@ -130,7 +130,7 @@ const ProfileScreen = (props) => {
   );
 };
 
-export default ProfileScreen;
+export default ProfileScreen
 
 const styles = StyleSheet.create({
   separator: {

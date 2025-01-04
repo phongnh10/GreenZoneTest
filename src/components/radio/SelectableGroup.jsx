@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 import colors from '../../constants/color';
 import Selectable from './Selectable';
 
@@ -10,9 +10,9 @@ const SelectableGroup = ({
     items,
     title = "Default title",
     selectedGroup,
+    setSelectedGroup,
     required = false,
-    note,
-    setSelectedGroup
+    note
 }) => {
 
     return (
@@ -28,7 +28,7 @@ const SelectableGroup = ({
                         item={item}
                         quantity={selectedGroup.find(selectedItem => selectedItem.id === item.id)?.quantity || 0}
                         selected={selectedGroup.some(selectedItem => selectedItem.id === item.id)}
-                        handlePlus={(item) => handlePlus(item, selectedGroup, setSelectedGroup)} 
+                        handlePlus={(item) => handlePlus(item, selectedGroup, setSelectedGroup)}
                         handleMinus={(item) => handleMinus(item, selectedGroup, setSelectedGroup)}
                         key={item.id}
                     />

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar } from 'react-native';
-import { IconButton } from 'react-native-paper';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar, FlatList } from 'react-native';
+import { IconButton, Icon } from 'react-native-paper';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 import colors from '../../constants/color';
 import RadioGroup from '../radio/RadioGroup';
-import OverlayStatusBar from '../status_bars/OverlayStatusBar';
+import OverlayStatusBar from '../status-bars/OverlayStatusBar';
 import SelectableGroup from '../radio/SelectableGroup';
 
 
@@ -61,6 +61,37 @@ const ProductDetailSheet = (props) => {
                     toggleDescription={toggleDescription}
                 />
 
+
+
+
+
+                <RadioGroup
+                    items={product.sizes}
+                    selectedValue={selectedSize}
+                    onValueChange={setSelectedSize}
+                    title="Size"
+                    required={true}
+                    note="Bắt buộc"
+                />
+
+
+
+                <RadioGroup
+                    items={product.sugarLevels}
+                    selectedValue={selectedSugarLevel}
+                    onValueChange={setSelectedSugarLevel}
+                    title="Chọn mức đường"
+                    required={true}
+                />
+
+                <RadioGroup
+                    items={product.iceLevels}
+                    selectedValue={selectedIceLevel}
+                    onValueChange={setSelectedIceLevel}
+                    title="Chọn mức đá"
+                    required={true}
+                />
+
                 <SelectableGroup
                     items={product.toppings}
                     title='Chọn topping'
@@ -70,35 +101,7 @@ const ProductDetailSheet = (props) => {
                 />
 
 
-                {/* <RadioGroup
-                    items={product.sizes}
-                    selectedValue={selectedSize}
-                    onValueChange={setSelectedSize}
-                    title="Size"
-                    required={true}
-                    note="Bắt buộc"
-                /> */}
-
-
-
-                {/* <RadioGroup
-                    items={sugarLevels}
-                    selectedValue={selectedSugarLevel}
-                    onValueChange={setSelectedSugarLevel}
-                    title="Chọn mức đường"
-                    required={true}
-                /> */}
-
-                {/* <RadioGroup
-                    items={product.iceLevels}
-                    selectedValue={selectedIceLevel}
-                    onValueChange={setSelectedIceLevel}
-                    title="Chọn mức đá"
-                    required={true}
-                /> */}
-
-
-
+                <NotesView />
 
 
 
@@ -141,8 +144,25 @@ const product = {
     isFavorite: false,
 };
 
+const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít sữa', 'Nhiều sữa', 'Nhiều kem']
 
 
+const NotesView = () => {
+    return (
+        <View style={styles.noteView}>
+            <FlatList
+                data={notes}
+                keyExtractor={(item, index) => index.toString()} // Tạo khóa duy nhất cho mỗi item
+                renderItem={({ item }) => (
+                    <View style={styles.noteItem}>
+                        <Text style={styles.noteText}>{item}</Text>
+                    </View>
+                )}
+                nestedScrollEnabled={true}
+            />
+        </View>
+    );
+};
 
 
 
@@ -159,6 +179,7 @@ const ProductImage = ({ hideModal }) => (
                 console.error('Failed to load image')
             }
         />
+
         <IconButton
             icon="close"
             size={GLOBAL_KEYS.ICON_SIZE_SMALL}
@@ -178,12 +199,14 @@ const ProductInfo = ({ isFavorite, toggleFavorite }) => (
         >
             Trà Sữa Trân Châu Hoàng Kim - Vị thơm ngon đặc biệt không thể bỏ lỡ!
         </Text>
-        <IconButton
-            icon={isFavorite ? "heart" : "heart-outline"}
-            size={GLOBAL_KEYS.ICON_SIZE_LARGE}
-            iconColor={isFavorite ? colors.primary : colors.gray700}
-            onPress={toggleFavorite}
-        />
+
+        <Pressable onPress={toggleFavorite}>
+            <Icon
+                source={isFavorite ? "heart" : "heart-outline"}
+                color={isFavorite ? colors.primary : colors.gray700}
+                size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+            />
+        </Pressable>
     </View>
 );
 
@@ -261,6 +284,7 @@ const styles = StyleSheet.create({
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         color: colors.gray700,
         lineHeight: GLOBAL_KEYS.LIGHT_HEIGHT_DEFAULT,
+        textAlign: 'justify'
     },
     title: {
         fontWeight: 'bold',
@@ -277,15 +301,6 @@ const styles = StyleSheet.create({
         fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         color: colors.teal900,
     },
-    price: {
-        color: 'black',
-        fontSize: 16,
-    },
-    selectedSize: {
-        color: 'black',
-        marginTop: 10,
-        fontSize: 16,
-    },
 
     radioGroup: {
         paddingHorizontal: GLOBAL_KEYS.PADDING_SMALL
@@ -296,7 +311,27 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     toppingItem: {
-        marginBottom: GLOBAL_KEYS.PADDING_SMALL, // Thêm khoảng cách giữa các topping items
+        marginBottom: GLOBAL_KEYS.PADDING_SMALL,
+    },
+    noteView: {
+        flex: 1,
+        padding: 16,
+        backgroundColor: '#f8f9fa',
+    },
+    noteItem: {
+        backgroundColor: '#ffffff',
+        padding: 12,
+        marginVertical: 6,
+        borderRadius: 8,
+        elevation: 2, // Tạo hiệu ứng đổ bóng trên Android
+        shadowColor: '#000', // Đổ bóng trên iOS
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+    },
+    noteText: {
+        fontSize: 16,
+        color: '#333333',
     },
 });
 

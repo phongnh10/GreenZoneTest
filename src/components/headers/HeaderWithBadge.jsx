@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import IconWithBadge from './IconWithBadge';
 import colors from '../../constants/color';
 import { Icon } from 'react-native-paper';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 
 
 const HeaderWithBadge = (props) => {

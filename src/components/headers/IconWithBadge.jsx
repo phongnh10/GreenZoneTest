@@ -3,13 +3,14 @@ import { View, StyleSheet, Pressable } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { Badge } from 'react-native-paper';
 import colors from '../../constants/color';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 
 const IconWithBadge = (props) => {
     const {
         quantity = 10,
         onPress
     } = props
+
     return (
         <Pressable
             onPress={onPress}
