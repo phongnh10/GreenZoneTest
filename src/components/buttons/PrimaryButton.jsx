@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
         padding: GLOBAL_KEYS.PADDING_DEFAULT,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        flex: 1
     },
     text: {
         color: colors.white,
-        fontSize: 16,
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
         fontWeight: 'bold',
     },
 });

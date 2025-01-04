@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import colors from '../../constants/color';
+import GLOBAL_KEYS from '../../constants/global_keys';
 
 
 const NormalHeader = (props) => {
@@ -24,7 +25,7 @@ const NormalHeader = (props) => {
         titleStyle={styles.title}
       />
 
-    
+
       {  // Quyết định có show right icon hay không ?
         enableRightIcon ? (
           <Appbar.Action icon={rightIcon} onPress={onRightPress} />
@@ -38,12 +39,15 @@ const NormalHeader = (props) => {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: colors.white
+  },
   title: {
-    fontSize: 16,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
     fontWeight: 'bold',
     textAlign: 'center',
     color: colors.black
   }
 });
 
-export default NormalHeader;
+export default NormalHeader
