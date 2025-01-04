@@ -6,6 +6,7 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/global_keys';
+import HeaderWithbadge from '../../components/headers/HeaderWithBadge'
 
 
 // commit again Duong branch
@@ -62,16 +63,6 @@ const data = [
 ];
 
 
-const groupedData = [
-  {
-    title: 'Cửa hàng gần bạn',
-    data: data.filter((item) => parseFloat(item.distance.split(' ')[2]) <= 1),
-  },
-  {
-    title: 'Cửa hàng Khác',
-    data: data.filter((item) => parseFloat(item.distance.split(' ')[2]) > 1),
-  },
-];
 
 const MerchantScreen = (props) => {
 
@@ -91,33 +82,49 @@ const MerchantScreen = (props) => {
   return (
 
     <SafeAreaView style={styles.container}>
-
+      <HeaderWithbadge  title='Cửa hàng'/>
       <View style={styles.content}>
       
-      <View style={styles.tool}>
-        <View style={styles.sreach}>
-           <IconFeather name="search" size={25} color={colors.primary} />
-           <TextInput
-            placeholder='Tìm kiếm'
-            placeholderTextColor={colors.gray400}
-           />
+        <View style={styles.tool}>
+          <View style={styles.sreach}>
+            <IconFeather name="search" size={25} color={colors.primary} />
+            <TextInput
+              placeholder='Tìm kiếm'
+              placeholderTextColor={colors.gray400}
+            />
+          </View>
+          <View style={styles.map}>
+            <IconFeather name="map-pin" size={25} color={colors.primary} />
+            <Text style={styles.textMap}>
+              Bản đồ
+            </Text>
+          </View>
         </View>
-        <View style={styles.map}>
-          <IconFeather name="map-pin" size={25} color={colors.primary} />
-          <Text style={styles.textMap}>
-            Bản đồ
-          </Text>
-        </View>
-      </View>
 
-      <View>
-        <SectionList
-          sections={groupedData}
-          renderItem={renderItem}
-          renderSectionHeader={renderSectionHeader}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+        <View style={styles.mechant1}>
+          <Text style={styles.tittle}>
+                Cửa hàng gần bạn
+            </Text>
+            <FlatList
+              data={data.slice(0, 1)}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              initialNumToRender={1}
+              showsVerticalScrollIndicator={false}
+            />
+        </View>
+          
+
+          <Text style={styles.tittle}>
+              Cửa hàng Khác
+          </Text>
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            nestedScrollEnabled={true}
+          />
       </View>
 
     </SafeAreaView>
@@ -135,8 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   content:{
-    paddingHorizontal: 16,
-    marginTop: 45,
+    paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
   },
   tool:{
     flexDirection: 'row',
@@ -144,13 +150,13 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
-    paddingVertical: 8
+    paddingVertical: GLOBAL_KEYS.PADDING_SMALL
   },
   sreach:{
     width: "70%",
     height: 42,
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.green100,
@@ -168,7 +174,7 @@ const styles = StyleSheet.create({
     marginStart: 8,
   },
   tittle:{
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 10,
@@ -202,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 12,
+    padding: GLOBAL_KEYS.PADDING_DEFAULT,
     marginBottom: 8,
     borderWidth: 1,
     borderColor: colors.gray300,
@@ -213,6 +219,9 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 3,
   },
+  mechant1:{
+    height: '17%'
+  }
 
 })
 
