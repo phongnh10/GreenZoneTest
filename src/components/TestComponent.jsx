@@ -3,7 +3,7 @@ import { StyleSheet, View, Button } from 'react-native';
 import colors from '../constants/color';
 import FlatInput from './inputs/FlatInput';
 
-import GLOBAL_KEYS from '../constants/global_keys';
+import GLOBAL_KEYS from '../constants/globalKeys';
 
 
 const TestComponent = () => {
