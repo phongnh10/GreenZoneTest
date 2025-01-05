@@ -1,189 +1,180 @@
-import { StyleSheet, Image, SafeAreaView, ImageBackground } from 'react-native'
+import React from 'react';
+import { StyleSheet, Image, SafeAreaView, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
 import { View, Text } from 'react-native';
-import NormalHeader from '../../components/headers/NormalHeader';
+import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import colors from '../../constants/color';
-import LightStatusBar from '../../components/status_bars/LightStatusBar'
-import { TouchableOpacity } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Icon } from 'react-native-paper';
 
-const VoucherScreen = (props) => {
 
+const VoucherScreen = () => {
   return (
-
     <SafeAreaView style={styles.container}>
-      <LightStatusBar/>
+      <LightStatusBar />
       <ImageBackground
         source={require('../../assets/images/bgvoucher.png')}
         resizeMode="cover"
-        style={styles.imagebg}
+        style={styles.imageBg}
       >
         <View style={styles.padding}>
           <Text style={styles.title}>Ưu đãi</Text>
           <View style={styles.content}>
             <Text style={styles.title}>Mới</Text>
             <TouchableOpacity style={styles.myticket}>
-              <MaterialCommunityIcons name="ticket-confirmation-outline" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />
+              <Icon source="ticket-confirmation-outline" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />
               <Text style={styles.tmyvoucher}>Voucher của tôi</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.barcode}>
-            <Image source={require('../../assets/images/barcode.png')} 
-                    style={styles.imgcode}
-            />
+            <Image source={require('../../assets/images/barcode.png')} style={styles.imgcode} />
             <Text>M41352236</Text>
           </View>
         </View>
       </ImageBackground>
-      <View style={styles.paddingbody}>
-        <View style={styles.extension}>
-          <TouchableOpacity style={styles.card}>
-              <MaterialCommunityIcons name="crown" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.yellow700}  />
-              <Text style={styles.cardText}>Hạng thành viên</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-              <AntDesign name="clockcircle" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.orange700}  />
-              <Text style={styles.cardText}>Thông tin cá nhân</Text>
+
+      <View style={styles.paddingBody}>
+        <View style={styles.row}>
+          {cardData.slice(0, 2).map((item) => (
+            <Card key={item.id} icon={item.icon} text={item.text} />
+          ))}
+        </View>
+        <View style={styles.row}>
+          {cardData.slice(2).map((item) => (
+            <Card key={item.id} icon={item.icon} text={item.text} />
+          ))}
+        </View>
+
+        <View style={styles.ticket}>
+          <Text style={styles.ticketTitle}>Phiếu ưu đãi của bạn</Text>
+          <TouchableOpacity style={styles.allTicket}>
+            <Text style={styles.textall}>Xem tất cả</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.extension}>
-          <TouchableOpacity style={styles.card}>
-              <Feather name="shield" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.red800}  />
-              <Text style={styles.cardText}>Lịch sử mua hàng</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-              <AntDesign name="gift" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary}  />
-              <Text style={styles.cardText}>Đổi thưởng</Text>
-          </TouchableOpacity>
-        </View>
-          <View style={styles.ticket}>
-            <Text style={styles.mytickettitle}>Phiếu ưu đãi của bạn</Text>
-            <TouchableOpacity style={styles.allticket}>
-              <Text style={styles.textall}>Xem tất cả</Text>
-            </TouchableOpacity>
-          </View>
       </View>
-      
     </SafeAreaView>
+  );
+};
 
 
-  )
-}
 
-export default VoucherScreen
+const { width, height } = Dimensions.get('window');
+
+// Dữ liệu để hiển thị các card
+const cardData = [
+  { id: 1, icon: <Icon source="crown" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.yellow700} />, text: "Hạng thành viên" },
+  { id: 2, icon: <Icon source="clock-edit" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.red800} />, text: "Lịch sử mua hàng" },
+  { id: 3, icon: <Icon source="shield-check" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.orange700} />, text: "Quyền lợi của bạn" },
+  { id: 4, icon: <Icon source="gift" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />, text: "Đổi thưởng" },
+];
+
+// Component hiển thị từng card
+const Card = ({ icon, text }) => (
+  <TouchableOpacity style={styles.card}>
+    {icon}
+    <Text style={styles.cardText}>{text}</Text>
+  </TouchableOpacity>
+);
+
+
+
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
-  imagebg: {
-    width: '100%',
-    height: "65%",
+  imageBg: {
+    maxWidth: '100%',
+    height: height / 3,
     overflow: 'hidden',
   },
-  padding:{
-    flexDirection: 'column',
-    padding: GLOBAL_KEYS.PADDING_DEFAULT,
-    gap: GLOBAL_KEYS.GAP_DEFAULT
-  },
-  paddingbody:{
+  padding: {
     flexDirection: 'column',
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
     gap: GLOBAL_KEYS.GAP_DEFAULT,
-    marginTop: -150
   },
-  title:{
+  paddingBody: {
+    flexDirection: 'column',
+    padding: GLOBAL_KEYS.PADDING_DEFAULT,
+    gap: GLOBAL_KEYS.GAP_DEFAULT,
+  },
+  title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
     fontWeight: 'bold',
     color: colors.white,
   },
-  content:{
+  content: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignContent: 'center',
     alignItems: 'center',
   },
-  myticket:{
+  myticket: {
     flexDirection: 'row',
-    alignContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
+    gap: GLOBAL_KEYS.GAP_SMALL,
   },
-  tmyvoucher:{
-    color: colors.primary
+  tmyvoucher: {
+    color: colors.primary,
   },
-  barcode:{
+  barcode: {
     backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     marginTop: GLOBAL_KEYS.GAP_SMALL,
-    alignContent: 'center',
     alignItems: 'center',
   },
-  imgcode:{
-    width: "100%"
+  imgcode: {
+    width: '100%',
   },
-  extension:{
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    
+    gap: GLOBAL_KEYS.GAP_DEFAULT,
   },
   card: {
-    width: "40%",
+    flex: 1,
     backgroundColor: colors.white,
-    marginVertical: 10,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
-    justifyContent: 'space-around',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
+    justifyContent: 'space-between',
+    shadowColor: colors.gray700,
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0,
     shadowRadius: 1,
-    elevation: 1,
+    elevation: 4,
   },
   cardText: {
-    fontSize: 14,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     fontWeight: 'bold',
     color: colors.black,
   },
-  ticket:{
+  ticket: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignContent: 'center',
     alignItems: 'center',
   },
-  mytickettitle:{
+  ticketTitle: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
     fontWeight: 'bold',
     color: colors.gray900,
   },
-  allticket:{
+  allTicket: {
     flexDirection: 'row',
-    alignContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.green500,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
   },
-  textall:{
+  textall: {
     color: colors.white,
     fontWeight: 'bold',
-  }
-
-})
-
+  },
+});
 
 
-
-
-
-
-
-
+export default VoucherScreen;
