@@ -1,38 +1,42 @@
-import { StyleSheet, Image, SafeAreaView, Pressable } from 'react-native'
-import React from 'react'
-import ScreenEnum from '../../constants/screenEnum'
-import axiosInstance from '../../axios'
+import { Image, SafeAreaView, View, Text, Button, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import ScreenEnum from '../../constants/screenEnum';
+import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
+import colors from '../../constants/color';
+import LightStatusBar from '../../components/status_bars/LightStatusBar';
 
-const HomeScreen = (props) => {
-  const { navigation } = props
 
+const { width } = Dimensions.get('window');
+
+const HomeScreen = props => {
+  const { navigation } = props;
 
   return (
-
     <SafeAreaView style={styles.container}>
-      <Pressable onPress={() => navigation.navigate(ScreenEnum.ProductDetail)}>
-        <Image source={require('../../assets/images/bottom_home.jpg')} style={{ width: '100%', height: '100%', resizeMode: 'cover' }} />
-      </Pressable>
+
+      <LightStatusBar />
+      <HeaderWithBadge
+        title="Home"
+        onBadgePress={() => console.log('Click badge')}
+        isHome={true}
+      />
+      
+
+      <Button title='Open Modal' onPress={() => navigation.navigate("ProductDetailSheet")} />
+
     </SafeAreaView>
+  );
+};
 
-  )
-}
-
-export default HomeScreen
+export default HomeScreen;
 
 
 const styles = StyleSheet.create({
+
   container: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: colors.white
   }
-
-})
-
-
-
-
-
-
-
-
-
+ 
+});
