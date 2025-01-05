@@ -1,5 +1,5 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import NormalHeader from '../../components/headers/NormalHeader';
 import colors from '../../constants/color';
 import {Icon} from 'react-native-paper';
@@ -7,10 +7,13 @@ import GLOBAL_KEYS from '../../constants/global_keys';
 import {Dimensions} from 'react-native';
 import FlatInput from '../../components/inputs/FlatInput';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
+import {CustomFlatInput} from '../../components/inputs/FlatInput';
 
 const {width} = Dimensions.get('window');
 const UpdateProfileScreen = props => {
   const {navigation} = props;
+  const {dob, setDob} = useState('');
+  const {sex, setSex} = useState('');
 
   return (
     <View style={styles.container}>
@@ -39,13 +42,20 @@ const UpdateProfileScreen = props => {
         <FlatInput label={'Họ'} />
         <FlatInput label={'Tên'} />
         <FlatInput label={'Email'} />
-        <FlatInput label={'Ngày sinh'} secureTextEntry={true} />
-        <FlatInput label={'Nam'} secureTextEntry={true} />
+        <CustomFlatInput label={'Ngày sinh'} value={dob} setValue={setDob} />
+        <CustomFlatInput
+          label={'Giới tính'}
+          value={sex}
+          setValue={setSex}
+          rightIcon="arrow-down-thin"
+        />
         <PrimaryButton title={'Cập nhật tài khoản'} />
       </View>
     </View>
   );
 };
+
+const Calendar = () => {};
 
 const styles = StyleSheet.create({
   container: {
