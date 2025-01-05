@@ -14,6 +14,7 @@ import GLOBAL_KEYS from '../../constants/global_keys';
 import {Dimensions} from 'react-native';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import {CustomFlatInput} from '../../components/inputs/FlatInput';
+import FlatInput from '../../components/inputs/FlatInput';
 
 const {width} = Dimensions.get('window');
 const UpdateProfileScreen = props => {
@@ -49,19 +50,9 @@ const UpdateProfileScreen = props => {
           </View>
         </View>
         <View style={styles.formContainer}>
-          <CustomFlatInput
-            label={'Họ'}
-            value={lastName}
-            setValue={setLastName}
-            rightIconColor={colors.white}
-          />
-          <CustomFlatInput
-            label={'Tên'}
-            value={firstName}
-            setValue={setFirstName}
-            rightIconColor={colors.white}
-          />
-          <CustomFlatInput label={'Email'} value={email} setValue={setEmail} />
+          <FlatInput label={'Họ'} value={lastName} setValue={setLastName} />
+          <FlatInput label={'Tên'} value={firstName} setValue={setFirstName} />
+          <FlatInput label={'Email'} value={email} setValue={setEmail} />
           <CustomFlatInput label={'Ngày sinh'} value={dob} setValue={setDob} />
           <CustomFlatInput
             label={'Giới tính'}
