@@ -10,17 +10,6 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {
-  Image,
-  SafeAreaView,
-  View,
-  Text,
-  Button,
-  FlatList,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
 import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
@@ -46,7 +35,6 @@ const HomeScreen = props => {
         />
 
         <CategoryScreen />
-
         <ComboProductsScreen />
 
         <Button
