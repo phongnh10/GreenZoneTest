@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar, FlatList } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar, FlatList, Dimensions } from 'react-native';
 import { IconButton, Icon } from 'react-native-paper';
 import GLOBAL_KEYS from '../../constants/globalKeys';
 import colors from '../../constants/color';
@@ -99,13 +99,6 @@ const ProductDetailSheet = (props) => {
                     setSelectedGroup={setSelectedGroup}
                     note="Tối đa 3 toppings"
                 />
-
-
-                <NotesView />
-
-
-
-
             </ScrollView>
         </View>
     );
@@ -147,22 +140,7 @@ const product = {
 const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít sữa', 'Nhiều sữa', 'Nhiều kem']
 
 
-const NotesView = () => {
-    return (
-        <View style={styles.noteView}>
-            <FlatList
-                data={notes}
-                keyExtractor={(item, index) => index.toString()} // Tạo khóa duy nhất cho mỗi item
-                renderItem={({ item }) => (
-                    <View style={styles.noteItem}>
-                        <Text style={styles.noteText}>{item}</Text>
-                    </View>
-                )}
-                nestedScrollEnabled={true}
-            />
-        </View>
-    );
-};
+
 
 
 
@@ -313,26 +291,8 @@ const styles = StyleSheet.create({
     toppingItem: {
         marginBottom: GLOBAL_KEYS.PADDING_SMALL,
     },
-    noteView: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#f8f9fa',
-    },
-    noteItem: {
-        backgroundColor: '#ffffff',
-        padding: 12,
-        marginVertical: 6,
-        borderRadius: 8,
-        elevation: 2, // Tạo hiệu ứng đổ bóng trên Android
-        shadowColor: '#000', // Đổ bóng trên iOS
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-    },
-    noteText: {
-        fontSize: 16,
-        color: '#333333',
-    },
+   
 });
 
 export default ProductDetailSheet;
+
