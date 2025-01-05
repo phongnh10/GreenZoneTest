@@ -9,7 +9,7 @@ const RadioButton = ({
     onPress,
     price
 }) => {
-    const radioColor = selected ? colors.primary : colors.gray700
+    const radioColor = selected ? colors.primary : colors.gray400
     const textColor = selected ? colors.primary : colors.black
 
     return (

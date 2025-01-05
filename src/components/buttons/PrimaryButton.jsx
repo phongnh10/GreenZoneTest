@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
         padding: GLOBAL_KEYS.PADDING_DEFAULT,
         alignItems: 'center',
         justifyContent: 'center',
-        // flex: 1
     },
     text: {
         color: colors.white,
@@ -32,4 +31,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PrimaryButton;
+export default PrimaryButton

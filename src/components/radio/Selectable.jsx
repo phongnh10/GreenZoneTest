@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/globalKeys';
-import Feather from 'react-native-vector-icons/Feather';
+import QuantityButton from '../buttons/QuantityButton';
+import QuantitySelector from '../buttons/QuantitySelector';
 
 const Selectable = ({
   item,
@@ -27,21 +28,12 @@ const Selectable = ({
             activeColor={activeColor} />
         )
           : (
-            <View style={styles.row}>
-              <QuantityButton
-                iconName='minus'
-                onPress={() => handleMinus(item)}
-                activeColor={activeColor}
-              />
-              <Text style={[styles.quantityText, { color: activeColor }]}>
-                {quantity}
-              </Text>
-              <QuantityButton
-                iconName='plus'
-                onPress={() => handlePlus(item)}
-                activeColor={activeColor}
-              />
-            </View>
+            <QuantitySelector
+              quantity={quantity}
+              activeColor={activeColor}
+              handlePlus={() => handlePlus(item)}
+              handleMinus={() => handleMinus(item)}
+            />
           )}
         <Text style={[styles.label, { color: textColor }]}>{item.name}</Text>
       </View>
@@ -52,14 +44,6 @@ const Selectable = ({
     </View>
   );
 };
-
-const QuantityButton = ({ iconName, onPress, activeColor }) => (
-  <Pressable onPress={onPress}>
-    <View style={[styles.circleWrapper, { borderColor: activeColor }]}>
-      <Feather name={iconName} color={activeColor} size={18} />
-    </View>
-  </Pressable>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -72,16 +56,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  circleWrapper: {
-    width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
-    height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
-    borderRadius: GLOBAL_KEYS.ICON_SIZE_DEFAULT / 2,
-    backgroundColor: colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.gray400,
   },
   label: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,

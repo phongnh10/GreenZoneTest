@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar, FlatList, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, Pressable, StatusBar } from 'react-native';
 import { IconButton, Icon } from 'react-native-paper';
 import GLOBAL_KEYS from '../../constants/globalKeys';
 import colors from '../../constants/color';
 import RadioGroup from '../radio/RadioGroup';
 import OverlayStatusBar from '../status-bars/OverlayStatusBar';
 import SelectableGroup from '../radio/SelectableGroup';
+import NotesList from '../notes-list/NotesList';
+import PrimaryButton from '../buttons/PrimaryButton';
+import QuantitySelector from '../buttons/QuantitySelector';
 
 
 
@@ -14,56 +17,28 @@ import SelectableGroup from '../radio/SelectableGroup';
 const ProductDetailSheet = (props) => {
 
     const { navigation } = props;
-    const [isFavorite, setIsFavorite] = useState(false); // State để xử lý toggle yêu thích
-    const [showFullDescription, setShowFullDescription] = useState(false); // State để toggle mô tả
+    const [showFullDescription, setShowFullDescription] = useState(false);
 
-    const [selectedSize, setSelectedSize] = useState(''); // Giá trị mặc định
-    const [selectedSugarLevel, setSelectedSugarLevel] = useState(''); // Giá trị mặc định
-    const [selectedIceLevel, setSelectedIceLevel] = useState(''); // Giá trị mặc định
-    const [selectedGroup, setSelectedGroup] = useState([]); // Giá trị mặc định
-    // selectedGroup = [{id: 1. quantity: 2}, {id: 2, quantity: 1}]
+    const [selectedSize, setSelectedSize] = useState('');
+    const [selectedSugarLevel, setSelectedSugarLevel] = useState('');
+    const [selectedIceLevel, setSelectedIceLevel] = useState('');
+    const [selectedGroup, setSelectedGroup] = useState([]);
+    const [selectedNotes, setSelectedNotes] = useState([]);
+    const [quantity, setQuantity] = useState(1); // Số lượng sản phẩm
 
-    console.log('selectedGroup', selectedGroup)
-
-
-    const hideModal = () => {
-        navigation.goBack();
-    };
-
-    const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);
-    };
-
-
-    {/** Hàm Ẩn / Hiện mô tả sản phẩm */ }
-    const toggleDescription = () => {
-        setShowFullDescription(!showFullDescription);
-    };
-
-    const productDescription =
-        "Trà Sữa Trân Châu Hoàng Kim là một thức uống được yêu thích với vị ngọt vừa phải, hương thơm đặc trưng và topping trân châu mềm dẻo. Thích hợp để thưởng thức trong mọi dịp.";
-
+    const totalPrice = quantity * product.price; // Tính tổng tiền
     return (
         <View style={styles.modalContainer}>
             <OverlayStatusBar />
             <ScrollView style={styles.modalContent}>
-                <ProductImage hideModal={hideModal} />
-
+                <ProductImage hideModal={() => navigation.goBack()} />
 
                 <ProductInfo
-                    isFavorite={isFavorite}
-                    toggleFavorite={toggleFavorite}
-                />
-
-                <ProductDescription
-                    description={productDescription}
+                    product={product}
+                    addToFavorite={() => { }}
                     showFullDescription={showFullDescription}
-                    toggleDescription={toggleDescription}
+                    toggleDescription={() => { setShowFullDescription(!showFullDescription); }}
                 />
-
-
-
-
 
                 <RadioGroup
                     items={product.sizes}
@@ -73,8 +48,6 @@ const ProductDetailSheet = (props) => {
                     required={true}
                     note="Bắt buộc"
                 />
-
-
 
                 <RadioGroup
                     items={product.sugarLevels}
@@ -99,17 +72,46 @@ const ProductDetailSheet = (props) => {
                     setSelectedGroup={setSelectedGroup}
                     note="Tối đa 3 toppings"
                 />
+
+                <NotesList
+                    title='Lưu ý cho quán'
+                    items={notes}
+                    selectedNotes={selectedNotes}
+                    onToggleNote={(note) => {
+                        if (selectedNotes.includes(note)) {
+                            setSelectedNotes(selectedNotes.filter((item) => item !== note));
+                        } else {
+                            setSelectedNotes([...selectedNotes, note]);
+                        }
+                    }}
+
+                    style={{ paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT }}
+                />
             </ScrollView>
+
+            <Footer
+                quantity={quantity}
+                handlePlus={() => {
+                    if (quantity < 10) {
+                        setQuantity(quantity + 1)
+                    }
+                }}
+                handleMinus={() => {
+                    if (quantity > 1) {
+                        setQuantity(quantity - 1)
+                    }
+                }}
+                totalPrice={68000}
+                addToCart={() => { }}
+            />
         </View>
     );
 };
 
-
-
 const product = {
     id: '1',
     name: 'Trà Sữa Trân Châu Hoàng Kim',
-    description: 'Trà Sữa Trân Châu Hoàng Kim là một thức uống được yêu thích với vị ngọt vừa phải.',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
     image: require('../../assets/images/product1.png'),
     sizes: [
         { id: 'S', name: 'S', price: 10000, discount: 500, available: true },
@@ -134,17 +136,34 @@ const product = {
         { id: '2', name: 'Ít ngọt', value: '50%' },
         { id: '3', name: 'Không đường', value: '0%' },
     ],
-    isFavorite: false,
+    isFavorite: true,
 };
 
 const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít sữa', 'Nhiều sữa', 'Nhiều kem']
 
+const Footer = ({ quantity, handlePlus, handleMinus, totalPrice = 68000, addToCart }) => {
+    return (
+        <View style={styles.footer}>
+
+            <View style={[styles.row, { justifyContent: 'space-between' }]}>
+                <View style={[styles.column, { paddingHorizontal: 0 }]}>
+                    <Text style={styles.quantityInfoText}>{quantity} sản phẩm</Text>
+                    <Text style={styles.totalText}>{totalPrice}đ</Text>
+                </View>
+
+                <QuantitySelector
+                    quantity={quantity}
+                    activeColor={colors.primary}
+                    handlePlus={handlePlus}
+                    handleMinus={handleMinus}
+                />
+            </View>
 
 
-
-
-
-
+            <PrimaryButton title='Thêm vào giỏ hàng' onPress={addToCart} />
+        </View>
+    );
+};
 
 const ProductImage = ({ hideModal }) => (
     <View style={styles.imageContainer}>
@@ -168,42 +187,43 @@ const ProductImage = ({ hideModal }) => (
     </View>
 );
 
-const ProductInfo = ({ isFavorite, toggleFavorite }) => (
-    <View style={styles.horizontalView}>
-        <Text
-            style={styles.productName}
-            numberOfLines={2}
-            ellipsizeMode="tail"
-        >
-            Trà Sữa Trân Châu Hoàng Kim - Vị thơm ngon đặc biệt không thể bỏ lỡ!
-        </Text>
-
-        <Pressable onPress={toggleFavorite}>
-            <Icon
-                source={isFavorite ? "heart" : "heart-outline"}
-                color={isFavorite ? colors.primary : colors.gray700}
-                size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
-            />
-        </Pressable>
-    </View>
-);
-
-const ProductDescription = ({ description, showFullDescription, toggleDescription }) => (
-    <View style={styles.descriptionContainer}>
-        <Text
-            style={styles.descriptionText}
-            numberOfLines={showFullDescription ? undefined : 2}
-            ellipsizeMode="tail"
-        >
-            {description}
-        </Text>
-        <Pressable style={styles.textButton} onPress={toggleDescription}>
-            <Text style={styles.textButtonLabel}>
-                {showFullDescription ? 'Thu gọn' : 'Xem thêm'}
+const ProductInfo = ({ product, addToFavorite, showFullDescription, toggleDescription }) => (
+    <View style={styles.infoContainer}>
+        {/* Product Name and Favorite Icon */}
+        <View style={styles.horizontalView}>
+            <Text
+                style={styles.productName}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+            >
+                Trà Sữa Trân Châu Hoàng Kim - Vị thơm ngon đặc biệt không thể bỏ lỡ!
             </Text>
-        </Pressable>
+            <Pressable onPress={addToFavorite}>
+                <Icon
+                    source={product.isFavorite ? "heart" : "heart-outline"}
+                    color={product.isFavorite ? colors.primary : colors.gray700}
+                    size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+                />
+            </Pressable>
+        </View>
+
+        {/* Product Description */}
+        <View style={styles.descriptionContainer}>
+            <Text
+                style={styles.descriptionText}
+                numberOfLines={showFullDescription ? undefined : 2}
+                ellipsizeMode="tail">
+                {product.description}
+            </Text>
+            <Pressable style={styles.textButton} onPress={toggleDescription}>
+                <Text style={styles.textButtonLabel}>
+                    {showFullDescription ? 'Thu gọn' : 'Xem thêm'}
+                </Text>
+            </Pressable>
+        </View>
     </View>
 );
+
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -218,7 +238,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         gap: GLOBAL_KEYS.GAP_SMALL,
         marginTop: StatusBar.currentHeight + 40,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        flex: 1,
+
     },
     imageContainer: {
         position: 'relative',
@@ -240,8 +262,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 4,
+        paddingVertical: GLOBAL_KEYS.PADDING_SMALL,
         paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     column: {
         flexDirection: 'column',
@@ -291,7 +317,36 @@ const styles = StyleSheet.create({
     toppingItem: {
         marginBottom: GLOBAL_KEYS.PADDING_SMALL,
     },
-   
+    footer: {
+        padding: 16,
+        elevation: 5,
+        backgroundColor: colors.white
+    },
+    infoContainer: {
+        flexDirection: 'column',
+        marginBottom: 8,
+    },
+    quantityInfoText: {
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
+        color: colors.black,
+    },
+    totalText: {
+        fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
+        fontWeight: 'bold',
+        color: colors.primary,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 16,
+    },
+    quantityText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: colors.black,
+        marginHorizontal: 8,
+    },
 });
 
 export default ProductDetailSheet;

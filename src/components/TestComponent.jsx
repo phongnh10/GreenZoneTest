@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Thêm ic
 import colors from '../constants/color';
 import GLOBAL_KEYS from '../constants/globalKeys';
 import CustomSearchBar from './inputs/CustomSearchBar';
+import NotesList from './notes-list/NotesList';
 
 const TestComponent = () => {
   const [selectedNotes, setSelectedNotes] = useState([]); // Danh sách các note được chọn
@@ -57,31 +58,6 @@ const TestComponent = () => {
   );
 };
 
-const NotesList = ({ selectedNotes, onToggleNote, notes, title = "Danh sách ghi chú" }) => {
-  return (
-    <View style={styles.noteView}>
-      <Text style={styles.title}>{title}</Text>
-      <FlatList
-        data={notes}
-        numColumns={4} // 4 cột
-        keyExtractor={(item, index) => index.toString()} // Khóa duy nhất
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[
-              styles.noteItem,
-              selectedNotes.includes(item) && { backgroundColor: colors.milk }, // Đổi màu nếu được chọn
-            ]}
-            onPress={() => onToggleNote(item)} // Gọi hàm onToggleNote khi bấm
-          >
-            <Text style={styles.noteText}>{item}</Text>
-          </TouchableOpacity>
-        )}
-        nestedScrollEnabled={true} // Cho phép cuộn bên trong FlatList
-      />
-    </View>
-  );
-};
-
 const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít sữa', 'Nhiều sữa', 'Nhiều kem'];
 
 const styles = StyleSheet.create({
@@ -108,34 +84,7 @@ const styles = StyleSheet.create({
   mapIcon: {
     marginRight: 8,
   },
-  noteView: {
-    backgroundColor: colors.white,
-    borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    gap: 4,
-    marginVertical: GLOBAL_KEYS.PADDING_SMALL,
-  },
-  title: {
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
-    fontWeight: 'bold',
-    marginBottom: GLOBAL_KEYS.PADDING_DEFAULT,
-    color: colors.black,
-  },
-  noteItem: {
-    backgroundColor: colors.white,
-    paddingHorizontal: 4,
-    paddingVertical: 4,
-    margin: 4,
-    borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    elevation: 3,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  noteText: {
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    color: colors.black,
-    textAlign: 'center',
-  },
+
 });
 
 export default TestComponent;
