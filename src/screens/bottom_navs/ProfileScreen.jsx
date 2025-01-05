@@ -1,12 +1,17 @@
-import { StyleSheet, Image, SafeAreaView, Text, View, ScrollView , TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Fontisto';
 
-
-
-
-const CardItem = ({ icon, text, color }) => {
+const CardItem = ({icon, text, color}) => {
   return (
     <View style={styles.card}>
       <Icon name={icon} size={24} color={color} />
@@ -15,16 +20,19 @@ const CardItem = ({ icon, text, color }) => {
   );
 };
 
-
-const ProfileScreen = (props) => {
+const ProfileScreen = props => {
+  const {navigation} = props;
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.header}>
         <Text style={styles.textHeader}>Khác</Text>
         <View style={styles.notification}>
           <View style={styles.itemNotification}>
-            <Icon name="ticket-confirmation-outline" size={25} color="#1c1c1c" />
+            <Icon
+              name="ticket-confirmation-outline"
+              size={25}
+              color="#1c1c1c"
+            />
           </View>
           <View style={styles.itemNotification}>
             <Icons name="bell" size={25} color="#1c1c1c" />
@@ -33,33 +41,29 @@ const ProfileScreen = (props) => {
       </View>
 
       <ScrollView style={styles.body}>
-        <Text style={styles.tittle}>
-          Tiện ích
-        </Text>
+        <Text style={styles.tittle}>Tiện ích</Text>
         <View style={styles.extention}>
-          <CardItem 
-            icon="file-document-outline" 
-            text="Lịch sử đơn hàng" 
-            color="#ff9800" 
+          <CardItem
+            icon="file-document-outline"
+            text="Lịch sử đơn hàng"
+            color="#ff9800"
           />
-          <CardItem 
-            icon="file-document-outline" 
-            text="Điều khoản" 
-            color="#8e44ad" 
+          <CardItem
+            icon="file-document-outline"
+            text="Điều khoản"
+            color="#8e44ad"
           />
         </View>
         <View style={styles.row}>
-          <CardItem 
-            icon="file-document-outline" 
-            text="Điều khoản VNPAY" 
-            color="#8e44ad" 
+          <CardItem
+            icon="file-document-outline"
+            text="Điều khoản VNPAY"
+            color="#8e44ad"
           />
         </View>
-        <Text style={styles.tittle}>
-          Hỗ trợ
-        </Text>
+        <Text style={styles.tittle}>Hỗ trợ</Text>
         <View style={styles.support}>
-            <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item}>
             <View style={styles.leftSection}>
               <Icon name="star-outline" size={24} color="#000" />
               <Text style={styles.title}>Đánh giá đơn hàng</Text>
@@ -84,12 +88,11 @@ const ProfileScreen = (props) => {
           </TouchableOpacity>
         </View>
 
-
-        <Text style={styles.tittle}>
-          Tài Khoản
-        </Text>
+        <Text style={styles.tittle}>Tài Khoản</Text>
         <View style={styles.support}>
-            <TouchableOpacity style={styles.item}>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => navigation.navigate('UpdateProfileScreen')}>
             <View style={styles.leftSection}>
               <Icon name="account-outline" size={24} color="#000" />
               <Text style={styles.title}>Thông tin cá nhân</Text>
@@ -124,7 +127,6 @@ const ProfileScreen = (props) => {
             <Icon name="chevron-right" size={24} color="#000" />
           </TouchableOpacity>
         </View>
-        
       </ScrollView>
     </SafeAreaView>
   );
@@ -139,11 +141,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     width: 352,
   },
-  support:{
+  support: {
     backgroundColor: '#fff',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
   item: {
     flexDirection: 'row',
@@ -179,34 +181,34 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1c1c1c',
   },
-  extention:{
-    flexDirection: 'row'
+  extention: {
+    flexDirection: 'row',
   },
-  tittle:{
+  tittle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
     marginTop: 10,
   },
-  body:{
+  body: {
     flexDirection: 'column',
     paddingHorizontal: 20,
-    marginTop: 15
+    marginTop: 15,
   },
-  textHeader:{
+  textHeader: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   itemNotification: {
     width: 50,
     height: 40,
-    marginHorizontal: 3, 
+    marginHorizontal: 3,
     backgroundColor: '#fff',
-    borderRadius: 15, 
-    justifyContent: 'center', 
+    borderRadius: 15,
+    justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: {width: 0, height: 5},
     shadowOpacity: 0.2,
     shadowRadius: 10,
     elevation: 5,
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    paddingVertical: 8
+    paddingVertical: 8,
   },
   container: {
     flex: 1,
