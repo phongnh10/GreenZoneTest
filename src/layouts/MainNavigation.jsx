@@ -1,7 +1,7 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Icon } from 'react-native-paper'; 
-import { Text } from 'react-native'; 
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Icon} from 'react-native-paper';
+import {Text} from 'react-native';
 import colors from '../constants/color';
 import ScreenEnum from '../constants/screenEnum';
 import HomeStackScreen from './stacks/HomeStackScreen';
@@ -17,17 +17,17 @@ const MainNavigation = () => {
   return (
     <BottomTab.Navigator
       initialRouteName={ScreenEnum.HomeStackScreen}
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         headerShown: false,
-        tabBarShowLabel: true, 
+        tabBarShowLabel: true,
         tabBarStyle: {
           backgroundColor: colors.white,
-          height: 60
+          maxHeight: 100,
+          height: 80,
         },
-        tabBarIcon: ({ focused }) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
 
-        
           if (route.name === ScreenEnum.HomeStackScreen) {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === ScreenEnum.OrderStackScreen) {
@@ -44,13 +44,12 @@ const MainNavigation = () => {
             <Icon
               source={iconName}
               color={focused ? colors.primary : colors.gray700}
-              size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} 
+              size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
             />
           );
         },
-        tabBarLabel: ({ focused }) => {
+        tabBarLabel: ({focused}) => {
           let label;
-
 
           if (route.name === ScreenEnum.HomeStackScreen) {
             label = 'Trang Chủ';
@@ -65,19 +64,38 @@ const MainNavigation = () => {
           }
 
           return (
-              <Text style={{ color: focused ? colors.primary : colors.gray700, fontSize: 12 }}>
-                {label}
-              </Text>   
+            <Text
+              style={{
+                color: focused ? colors.primary : colors.gray700,
+                fontSize: 12,
+              }}>
+              {label}
+            </Text>
           );
         },
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.gray700, 
+        tabBarInactiveTintColor: colors.gray700,
       })}>
-      <BottomTab.Screen name={ScreenEnum.HomeStackScreen} component={HomeStackScreen} />
-      <BottomTab.Screen name={ScreenEnum.OrderStackScreen} component={OrderStackScreen} />
-      <BottomTab.Screen name={ScreenEnum.MerchantStackScreen} component={MerchantStackScreen} />
-      <BottomTab.Screen name={ScreenEnum.VoucherStackScreen} component={VoucherStackScreen} />
-      <BottomTab.Screen name={ScreenEnum.ProfileStackScreen} component={ProfileStackScreen} />
+      <BottomTab.Screen
+        name={ScreenEnum.HomeStackScreen}
+        component={HomeStackScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenEnum.OrderStackScreen}
+        component={OrderStackScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenEnum.MerchantStackScreen}
+        component={MerchantStackScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenEnum.VoucherStackScreen}
+        component={VoucherStackScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenEnum.ProfileStackScreen}
+        component={ProfileStackScreen}
+      />
     </BottomTab.Navigator>
   );
 };
