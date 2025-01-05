@@ -86,7 +86,7 @@ const MerchantScreen = (props) => {
       <View style={styles.content}>
       
         <View style={styles.tool}>
-          <View style={styles.sreach}>
+          <View style={styles.search}>
             <IconFeather name="search" size={25} color={colors.primary} />
             <TextInput
               placeholder='Tìm kiếm'
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingVertical: GLOBAL_KEYS.PADDING_SMALL
   },
-  sreach:{
+  search:{
     width: "70%",
     height: 42,
     flexDirection: 'row',
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green100,
     borderRadius: 6,
   },
-  textSreach:{
+  textSearch:{
     marginStart: 8,
     color: colors.gray700
   },
