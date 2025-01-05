@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     marginHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-    gap: 24,
+    gap: GLOBAL_KEYS.GAP_DEFAULT,
   },
 });
 
