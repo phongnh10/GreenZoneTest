@@ -1,9 +1,38 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Pressable } from 'react-native';
-// Sử dụng vector icon
+import PropTypes from 'prop-types'; // Import thư viện PropTypes
 import colors from '../../constants/color';
 import { Icon } from 'react-native-paper';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 
+
+
+
+const CustomSearchBarPropTypes = {
+  placeholder: PropTypes.string,
+  searchQuery: PropTypes.string.isRequired, // Dữ liệu bắt buộc
+  setSearchQuery: PropTypes.func.isRequired, // Hàm bắt buộc
+  onClearIconPress: PropTypes.func.isRequired, // Hàm bắt buộc
+  style: PropTypes.object,
+  leftIcon: PropTypes.string,
+  rightIcon: PropTypes.string,
+  rightIconColor: PropTypes.string,
+  onLeftIconPress: PropTypes.func,
+};
+/**
+ *
+ * Usage Example
+ *  <CustomSearchBar
+      placeholder="Tìm kiếm ghi chú..."
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      onClearIconPress={() => setSearchQuery('')}
+      leftIcon="magnify"
+      rightIcon="close"
+      style={{ flex: 1, marginRight: 16, elevation: 3 }}
+    />
+ *
+ */
 const CustomSearchBar = ({
   placeholder = "Search",
   searchQuery,
@@ -13,7 +42,7 @@ const CustomSearchBar = ({
   leftIcon = "magnify",
   rightIcon = "close",
   rightIconColor = colors.primary,
-  onLeftIconPress = () => { },
+  onLeftIconPress,
 }) => {
   return (
     <View style={[styles.container, style]}>
@@ -41,18 +70,22 @@ const CustomSearchBar = ({
   );
 };
 
+CustomSearchBar.propTypes = CustomSearchBarPropTypes
+
+
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.green100,
-    borderRadius: 8,
-    paddingHorizontal: 8,
+    borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
+    paddingHorizontal: GLOBAL_KEYS.PADDING_SMALL,
     height: 50,
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     color: colors.black,
     marginHorizontal: 10,
   },
