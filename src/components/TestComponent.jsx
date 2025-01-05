@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
+import colors from '../constants/color';
 
 const width = Dimensions.get('window').width; // Chiều rộng màn hình
 
@@ -11,10 +12,12 @@ const TestComponent = () => {
   );
 };
 
-const NotesView = () => {
+const NotesView = ({
+  title = "Default title",
+}) => {
   return (
     <View style={styles.noteView}>
-      <Text style={styles.title}>Lưu ý cho món</Text>
+      <Text style={styles.title}>{title}</Text>
       <FlatList
         data={notes}
         numColumns={4} // 4 cột
@@ -35,14 +38,14 @@ const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít s�
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
     padding: 16,
   },
   noteView: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: colors.white,
     borderRadius: 8,
-    padding: 16,
+    gap: 4,
     marginVertical: 8,
   },
   title: {
@@ -53,12 +56,13 @@ const styles = StyleSheet.create({
   },
   noteItem: {
     backgroundColor: '#ffffff',
-    padding: 10,
+    paddingHorizontal: 4,
+    paddingVertical: 4,
     margin: 4,
-    borderRadius: 8,
-    elevation: 2, // Hiệu ứng đổ bóng trên Android
-    shadowColor: '#000', // Hiệu ứng đổ bóng trên iOS
-    shadowOffset: { width: 0, height: 2 },
+    borderRadius: 6,
+    elevation: 4, // Hiệu ứng đổ bóng trên Android
+    shadowColor: colors.black, // Hiệu ứng đổ bóng trên iOS
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     flex: 1,
