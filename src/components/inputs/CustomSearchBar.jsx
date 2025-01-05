@@ -1,40 +1,60 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Searchbar } from 'react-native-paper';
-import Feather from 'react-native-vector-icons/Feather';
+import { View, TextInput, StyleSheet, Pressable } from 'react-native';
+// Sử dụng vector icon
 import colors from '../../constants/color';
-import GLOBAL_KEYS from '../../constants/globalKeys';
+import { Icon } from 'react-native-paper';
 
-const CustomSearchBar = (props) => {
-  const {
-    placeholder = "Search",
-    searchQuery,
-    setSearchQuery,
-    style
-  } = props;
-
+const CustomSearchBar = ({
+  placeholder = "Search",
+  searchQuery,
+  setSearchQuery,
+  onClearIconPress,
+  style = {},
+  leftIcon = "magnify",
+  rightIcon = "close",
+  rightIconColor = colors.primary,
+  onLeftIconPress = () => { },
+}) => {
   return (
-    <Searchbar
-      placeholder={placeholder}
-      value={searchQuery}
-      onChangeText={setSearchQuery}
-      icon={() => <Feather name="search" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />}
-      clearIcon="close"
-      inputStyle={styles.input}
-      elevation={1}
-      style={[styles.searchBar, style]}
-    />
+    <View style={[styles.container, style]}>
+      {/* Left Icon */}
+      <Pressable onPress={onLeftIconPress}>
+        <Icon source={leftIcon} size={24} color={colors.primary} />
+      </Pressable>
+
+      {/* Input */}
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        placeholderTextColor={colors.gray}
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+      />
+
+      {/* Right Icon */}
+      {searchQuery ? (
+        <Pressable onPress={onClearIconPress}>
+          <Icon source={rightIcon} size={24} color={rightIconColor} />
+        </Pressable>
+      ) : null}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  searchBar: {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: colors.green100,
-    borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    height: 50,
   },
   input: {
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
+    flex: 1,
+    fontSize: 16,
     color: colors.black,
+    marginHorizontal: 10,
   },
 });
 

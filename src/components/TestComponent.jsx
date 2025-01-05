@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Thêm icon
 import colors from '../constants/color';
 import GLOBAL_KEYS from '../constants/globalKeys';
-
+import CustomSearchBar from './inputs/CustomSearchBar';
 
 const TestComponent = () => {
   const [selectedNotes, setSelectedNotes] = useState([]); // Danh sách các note được chọn
+  const [searchQuery, setSearchQuery] = useState(''); // Nội dung tìm kiếm
 
   const onToggleNote = (note) => {
     if (selectedNotes.includes(note)) {
@@ -17,17 +19,45 @@ const TestComponent = () => {
     }
   };
 
+  const filteredNotes = notes.filter((note) =>
+    note.toLowerCase().includes(searchQuery.toLowerCase())
+  ); // Lọc danh sách theo nội dung tìm kiếm
+
   return (
     <View style={styles.container}>
+      {/* SearchBar và Bản đồ */}
+      <View style={styles.searchBarContainer}>
+        <CustomSearchBar
+          placeholder="Tìm kiếm ghi chú..."
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onClearIconPress={() => setSearchQuery('')}
+          leftIcon="magnify"
+          rightIcon="close"
+          style={{ flex: 1, marginRight: 16, elevation: 3 }}
+        />
+        {/* Text Bản đồ và Icon Map */}
+        <View style={styles.mapContainer}>
+          <Icon name="map-marker" size={24} color={colors.primary} style={styles.mapIcon} />
+          <Text style={styles.mapText}>Bản đồ</Text>
+
+        </View>
+
+        {/* CustomSearchBar */}
+
+      </View>
+
+      {/* Danh sách ghi chú */}
       <NotesList
         selectedNotes={selectedNotes}
         onToggleNote={onToggleNote}
+        notes={filteredNotes} // Chỉ hiển thị các ghi chú đã lọc
       />
     </View>
   );
 };
 
-const NotesList = ({ selectedNotes, onToggleNote, title = "Default title" }) => {
+const NotesList = ({ selectedNotes, onToggleNote, notes, title = "Danh sách ghi chú" }) => {
   return (
     <View style={styles.noteView}>
       <Text style={styles.title}>{title}</Text>
@@ -60,8 +90,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
   },
+  searchBarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  mapContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  mapText: {
+    fontSize: 16,
+    color: colors.primary,
+    marginRight: 8,
+    fontWeight: 'bold',
+  },
+  mapIcon: {
+    marginRight: 8,
+  },
   noteView: {
-    flex: 1,
     backgroundColor: colors.white,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     gap: 4,
@@ -79,11 +126,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     margin: 4,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    elevation: 3, // Hiệu ứng đổ bóng trên Android
-    shadowColor: colors.black, // Hiệu ứng đổ bóng trên iOS
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    elevation: 3,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
