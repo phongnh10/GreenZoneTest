@@ -98,6 +98,7 @@ const CardUtiliti = ({icon, title, onPress}) => (
     </View>
   </Pressable>
 );
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
