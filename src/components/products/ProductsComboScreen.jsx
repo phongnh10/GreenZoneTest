@@ -5,26 +5,35 @@ import {
   Image,
   FlatList,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import formatVND from '../../utils/formatVND';
+import {Icon} from 'react-native-paper';
 
 const width = Dimensions.get('window').width;
 
-const ProductsComboScreen = () => {
+const ProductsComboScreen = props => {
+  const {onItemClick} = props;
+
+  const [title, setTitle] = useState('Combo 69K + Freeship');
+  const [time, setTime] = useState('08:00:00');
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerTextContainer}>
-          <Text style={styles.headerText}>Combo 69K + Freeship</Text>
-          <Text style={styles.timeText}>08:00:00</Text>
+          <Text style={styles.headerText}>{title}</Text>
+          <Text style={styles.timeText}>{time}</Text>
         </View>
         <FlatList
           data={productsCombo}
           keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => <ItemProduct item={item} />}
+          renderItem={({item}) => (
+            <ItemProduct item={item} onItemClick={() => onItemClick()} />
+          )}
           horizontal={true}
           contentContainerStyle={{
             gap: GLOBAL_KEYS.GAP_DEFAULT,
@@ -36,7 +45,7 @@ const ProductsComboScreen = () => {
   );
 };
 
-const ItemProduct = ({item}) => {
+const ItemProduct = ({item, onItemClick}) => {
   return (
     <View style={styles.itemProduct}>
       <Image source={item.image} style={styles.itemImage} />
@@ -44,14 +53,21 @@ const ItemProduct = ({item}) => {
         <Text style={styles.priceText}>{formatVND(item.price)}</Text>
       </View>
       <View style={styles.productNameContainer}>
-        <Text style={styles.productNameText}>{item.name}</Text>
+        <Text numberOfLines={4} style={styles.productNameText}>
+          {item.name}
+        </Text>
       </View>
-      <View style={styles.addButtonContainer}>
-        <Image
-          source={require('../../assets/icons/icon_handler/icon_add_product.png')}
-          style={styles.addButton}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={() => onItemClick()}
+        style={styles.addButtonContainer}>
+        <View style={styles.addButton}>
+          <Icon
+            source="plus"
+            color={colors.primary}
+            size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+          />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -86,7 +102,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: colors.black,
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     fontWeight: 'semibold',
   },
   timeText: {
@@ -142,6 +158,9 @@ const styles = StyleSheet.create({
     width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

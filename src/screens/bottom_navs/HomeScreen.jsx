@@ -17,8 +17,8 @@ import colors from '../../constants/color';
 import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import OverlayStatusBar from '../../components/status_bars/OverlayStatusBar';
 import CategoryScreen from '../../components/category/CategoryScreen';
-import ComboProductsScreen from '../product/ComboProductsScreen';
-
+import ProductsComboScreen from '../../components/products/ProductsComboScreen';
+import ProductsNewDishScreen from '../../components/products/ProductsColumnScreen';
 const {width} = Dimensions.get('window');
 
 const HomeScreen = props => {
@@ -35,7 +35,12 @@ const HomeScreen = props => {
         />
 
         <CategoryScreen />
-        <ComboProductsScreen />
+        <ProductsComboScreen
+          onItemClick={() => navigation.navigate('ProductDetailSheet')}
+        />
+        <ProductsNewDishScreen
+          onItemClick={() => navigation.navigate('ProductDetailSheet')}
+        />
 
         <Button
           title="Open Modal"

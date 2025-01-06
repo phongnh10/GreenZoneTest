@@ -21,6 +21,10 @@ const screens = {
   // ProfileScreen
   ProfileStackScreen: 'ProfileStackScreen',
   UpdateProfileScreen: 'UpdateProfileScreen',
+
+  // Component
+  ProductsComboScreen: 'ProductsComboScreen',
+  ProductsNewDishScreen: 'ProductsNewDishScreen',
 };
 
 const ScreenEnum = Object.freeze({
