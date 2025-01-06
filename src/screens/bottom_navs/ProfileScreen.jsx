@@ -87,9 +87,6 @@ const CardUtiliti = ({ icon, title, onPress }) => (
     </View>
   </Pressable>
 );
-
-// test
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -116,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     elevation: 3,
-    gap: GLOBAL_KEYS.GAP_SMALL,
+    gap: GLOBAL_KEYS.GAP_DEFAULT,
   },
   cardText: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
