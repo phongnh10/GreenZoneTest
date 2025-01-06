@@ -1,64 +1,67 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
-import colors from '../constants/color';
-import FlatInput from './inputs/FlatInput';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, PermissionsAndroid, Platform} from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
 
-import GLOBAL_KEYS from '../constants/global_keys';
-
-
-const TestComponent = () => {
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [errors, setErrors] = useState({
-    fullname: '',
-    email: '',
-    password: '',
+const App = () => {
+  const [region, setRegion] = useState({
+    latitude: 10.7769, // Tọa độ mặc định (TP. Hồ Chí Minh)
+    longitude: 106.7009,
+    latitudeDelta: 0.01, // Độ zoom mặc định
+    longitudeDelta: 0.01,
   });
 
-  const validateInputs = () => {
-    const newErrors = {
-      fullname: fullname.trim() === '' ? 'Fullname is required' : '',
-      email: email.trim() === '' ? 'Email is required' : '',
-      password: password.trim() === '' ? 'Password is required' : '',
-    };
-    setErrors(newErrors);
+  // Yêu cầu quyền truy cập vị trí
+  const requestPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true;
   };
+
+  // Lấy vị trí hiện tại của người dùng
+  const getCurrentLocation = async () => {
+    const hasPermission = await requestPermission();
+    if (hasPermission) {
+      Geolocation.getCurrentPosition(
+        position => {
+          setRegion({
+            ...region,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        error => {
+          console.log('Error getting location:', error);
+        },
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      );
+    }
+  };
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <FlatInput
-        label="Fullname"
-        value={fullname}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, fullname: '' }));
-          setFullname(value);
-        }}
-        message={errors.fullname}
-      />
-      <FlatInput
-        label="Email"
-        value={email}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, email: '' }));
-          setEmail(value);
-        }}
-        message={errors.email}
-      />
-      <FlatInput
-        label="Password"
-        value={password}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, password: '' }));
-          setPassword(value);
-        }}
-        message={errors.password}
-        secureTextEntry
-        isPasswordVisible={isPasswordVisible}
-        setIsPasswordVisible={setIsPasswordVisible}
-      />
-      <Button title="Validate" onPress={validateInputs} />
+      <MapView
+        style={styles.map}
+        region={region}
+        showsUserLocation={true}
+        followsUserLocation={true}
+        onRegionChangeComplete={region => setRegion(region)}>
+        <Marker
+          coordinate={{
+            latitude: region.latitude,
+            longitude: region.longitude,
+          }}
+          title="You are here"
+        />
+      </MapView>
     </View>
   );
 };
@@ -66,10 +69,10 @@ const TestComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    padding: GLOBAL_KEYS.PADDING_DEFAULT,
-    gap: GLOBAL_KEYS.GAP_DEFAULT,
+  },
+  map: {
+    flex: 1,
   },
 });
 
-export default TestComponent
+export default App;

@@ -13,17 +13,17 @@ const HomeScreen = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <LightStatusBar />
       <HeaderWithBadge
         title="Home"
         onBadgePress={() => console.log('Click badge')}
         isHome={true}
       />
-      
 
-      <Button title='Open Modal' onPress={() => navigation.navigate("ProductDetailSheet")} />
-
+      <Button
+        title="Open Modal"
+        onPress={() => navigation.navigate('ProductDetailSheet')}
+      />
     </SafeAreaView>
   );
 };

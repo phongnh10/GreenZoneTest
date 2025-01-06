@@ -5,6 +5,7 @@ import ScreenEnum from '../../constants/screenEnum';
 import HomeScreen from '../../screens/bottom_navs/HomeScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ProductDetailSheet from '../../components/bottom_sheets/ProductDetailSheet';
+import CategoryModal from '../../components/bottom_sheets/CategoryModal';
 
 
 const HomeStack = createNativeStackNavigator()
