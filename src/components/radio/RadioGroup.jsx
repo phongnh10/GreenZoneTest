@@ -10,7 +10,7 @@ const RadioGroup = ({
   selectedValue,
   onValueChange,
   title,
-  required = false, // Bắt buộc chọn hay không
+  required = false,
   note
 }) => {
   return (
