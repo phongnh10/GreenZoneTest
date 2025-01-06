@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ScreenEnum from '../../constants/screenEnum';
-import HomeScreen from '../../screens/bottom_navs/HomeScreen';
+import HomeScreen from '../../screens/bottom-navs/HomeScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ProductDetailSheet from '../../components/bottom_sheets/ProductDetailSheet';
 import ProductsComboScreen from '../../components/products/ProductsComboScreen';
