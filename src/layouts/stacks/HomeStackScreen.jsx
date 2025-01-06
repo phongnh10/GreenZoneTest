@@ -5,7 +5,7 @@ import HomeScreen from '../../screens/bottom_navs/HomeScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ProductDetailSheet from '../../components/bottom_sheets/ProductDetailSheet';
 import ProductsComboScreen from '../../components/products/ProductsComboScreen';
-import ProductsNewDishScreen from '../../components/products/ProductsColumnScreen';
+import ProductsNewDishScreen from '../../components/products/ProductsNewDishScreen';
 const HomeStack = createNativeStackNavigator();
 const HomeStackScreen = () => {
   return (

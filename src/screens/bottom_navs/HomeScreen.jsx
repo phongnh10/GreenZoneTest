@@ -18,7 +18,7 @@ import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import OverlayStatusBar from '../../components/status_bars/OverlayStatusBar';
 import CategoryScreen from '../../components/category/CategoryScreen';
 import ProductsComboScreen from '../../components/products/ProductsComboScreen';
-import ProductsNewDishScreen from '../../components/products/ProductsColumnScreen';
+import ProductsNewDishScreen from '../../components/products/ProductsNewDishScreen';
 const {width} = Dimensions.get('window');
 
 const HomeScreen = props => {
