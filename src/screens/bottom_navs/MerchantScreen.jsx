@@ -26,8 +26,8 @@ const MerchantScreen = (props) => {
           </View>
         </View>
 
-          <View style={styles.mechant1}>
-            <Text style={styles.tittle}>
+          <View>
+            <Text style={styles.title}>
                   Cửa hàng gần bạn
               </Text>
               <FlatList
@@ -38,7 +38,7 @@ const MerchantScreen = (props) => {
               />
           </View>
 
-          <Text style={styles.tittle}>
+          <Text style={styles.title}>
               Cửa hàng Khác
           </Text>
           <FlatList
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
   },
   content:{
     paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
+    flex: 1
   },
   tool:{
     flexDirection: 'row',
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
-  tittle:{
+  title:{
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     fontWeight: 'bold',
     marginVertical: 10,
@@ -176,21 +177,18 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
     marginBottom: 8, 
     borderWidth: 1,
-    borderColor: colors.gray300,
+    borderColor: colors.gray200,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 4,
+    elevation:  3 
   },
-  mechant1:{
-    
-  }
 
 })
 

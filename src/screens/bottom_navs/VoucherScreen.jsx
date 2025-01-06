@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, SafeAreaView, ImageBackground, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Image, SafeAreaView, ImageBackground, TouchableOpacity, Dimensions, Pressable, Alert } from 'react-native';
 import { View, Text } from 'react-native';
 import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import GLOBAL_KEYS from '../../constants/global_keys';
@@ -21,7 +21,11 @@ const VoucherScreen = () => {
           <View style={styles.content}>
             <Text style={styles.title}>Mới</Text>
             <TouchableOpacity style={styles.myticket}>
-              <Icon source="ticket-confirmation-outline" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />
+              <Icon 
+                source="ticket-confirmation-outline" 
+                size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} 
+                color={colors.primary} 
+                />
               <Text style={styles.tmyvoucher}>Voucher của tôi</Text>
             </TouchableOpacity>
           </View>
@@ -34,51 +38,53 @@ const VoucherScreen = () => {
 
       <View style={styles.paddingBody}>
         <View style={styles.row}>
-          {cardData.slice(0, 2).map((item) => (
-            <Card key={item.id} icon={item.icon} text={item.text} />
-          ))}
+          <Card
+            iconName="crown"
+            color={colors.yellow700}
+            title="Hạng thành viên"
+            onPress={() => alert('Hạng thành viên!')}
+          />
+          <Card
+            iconName="clock-edit"
+            color={colors.red800}
+            title="Lịch sử mua hàng"
+            onPress={() => alert('Lịch sử mua hàng')}
+          />
         </View>
         <View style={styles.row}>
-          {cardData.slice(2).map((item) => (
-            <Card key={item.id} icon={item.icon} text={item.text} />
-          ))}
+          <Card
+            iconName="shield-check"
+            color={colors.orange700}
+            title="Quyền lợi của bạn"
+            onPress={() => alert('Quyền lợi của bạn!')}
+          />
+          <Card
+            iconName="gift"
+            color={colors.primary}
+            title="Đổi thưởng"
+            onPress={() => alert('Đổi thưởng!')}
+          />
         </View>
 
         <View style={styles.ticket}>
           <Text style={styles.ticketTitle}>Phiếu ưu đãi của bạn</Text>
-          <TouchableOpacity style={styles.allTicket}>
+          <Pressable style={styles.allTicket}>
             <Text style={styles.textall}>Xem tất cả</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-
-
-const { width, height } = Dimensions.get('window');
-
-// Dữ liệu để hiển thị các card
-const cardData = [
-  { id: 1, icon: <Icon source="crown" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.yellow700} />, text: "Hạng thành viên" },
-  { id: 2, icon: <Icon source="clock-edit" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.red800} />, text: "Lịch sử mua hàng" },
-  { id: 3, icon: <Icon source="shield-check" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.orange700} />, text: "Quyền lợi của bạn" },
-  { id: 4, icon: <Icon source="gift" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />, text: "Đổi thưởng" },
-];
-
-// Component hiển thị từng card
-const Card = ({ icon, text }) => (
-  <TouchableOpacity style={styles.card}>
-    {icon}
-    <Text style={styles.cardText}>{text}</Text>
-  </TouchableOpacity>
-);
-
-
-
-
-
+const Card = ({ iconName, color, title, onPress }) => {
+  return (
+    <Pressable style={styles.card} onPress={onPress}>
+      <Icon source={iconName} size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={color} />
+      <Text style={styles.cardText}>{title}</Text>
+    </Pressable>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -86,8 +92,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   imageBg: {
-    maxWidth: '100%',
-    height: height / 3,
     overflow: 'hidden',
   },
   padding: {
@@ -143,10 +147,10 @@ const styles = StyleSheet.create({
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
     justifyContent: 'space-between',
     shadowColor: colors.gray700,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0,
     shadowRadius: 1,
-    elevation: 4,
+    elevation: 3,
   },
   cardText: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
