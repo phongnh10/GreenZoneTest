@@ -14,11 +14,11 @@ import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
 import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
 import colors from '../../constants/color';
-import LightStatusBar from '../../components/status_bars/LightStatusBar';
-import OverlayStatusBar from '../../components/status_bars/OverlayStatusBar';
-import CategoryScreen from '../../components/category/CategoryScreen';
-import ProductsComboScreen from '../../components/products/ProductsComboScreen';
-import ProductsNewDishScreen from '../../components/products/ProductsNewDishScreen';
+import LightStatusBar from '../../components/status-bars/LightStatusBar';
+import OverlayStatusBar from '../../components/status-bars/OverlayStatusBar';
+import CategoryMenu from '../../components/category/CategoryMenu';
+import ProductsComboScreen from '../../components/products/ProductsListHorizontal';
+import ProductsNewDishScreen from '../../components/products/ProductsListVertical';
 const {width} = Dimensions.get('window');
 
 const HomeScreen = props => {
@@ -34,7 +34,7 @@ const HomeScreen = props => {
           isHome={true}
         />
 
-        <CategoryScreen />
+        <CategoryMenu />
         <ProductsComboScreen
           onItemClick={() => navigation.navigate('ProductDetailSheet')}
         />

@@ -1,11 +1,17 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text, View, Pressable, Alert } from 'react-native';
-import { Icon } from 'react-native-paper';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import {
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  Pressable,
+  Alert,
+} from 'react-native';
+import {Icon} from 'react-native-paper';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 import colors from '../../constants/color';
-import LightStatusBar from '../../components/status_bars/LightStatusBar';
+import LightStatusBar from '../../components/status-bars/LightStatusBar';
 import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
-
 
 const ProfileScreen = () => {
   return (
@@ -70,19 +76,23 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen
+export default ProfileScreen;
 
-const CardAccount = ({ icon, color, title, onPress }) => (
+const CardAccount = ({icon, color, title, onPress}) => (
   <Pressable style={styles.card} onPress={onPress}>
     <Icon source={icon} size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={color} />
     <Text style={styles.cardText}>{title}</Text>
   </Pressable>
 );
 
-const CardUtiliti = ({ icon, title, onPress }) => (
+const CardUtiliti = ({icon, title, onPress}) => (
   <Pressable style={styles.item} onPress={onPress}>
     <View style={styles.leftSection}>
-      <Icon source={icon} size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.gray700} />
+      <Icon
+        source={icon}
+        size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+        color={colors.gray700}
+      />
       <Text style={styles.itemText}>{title}</Text>
     </View>
   </Pressable>
@@ -91,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   body: {
     paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
@@ -105,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: GLOBAL_KEYS.GAP_DEFAULT,
     marginBottom: GLOBAL_KEYS.GAP_DEFAULT,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   card: {
     flex: 1,

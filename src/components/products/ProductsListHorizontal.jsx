@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import colors from '../../constants/color';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 import formatVND from '../../utils/formatVND';
 import {Icon} from 'react-native-paper';
 
 const width = Dimensions.get('window').width;
 
-const ProductsComboScreen = props => {
+const ProductsListHorizontal = props => {
   const {onItemClick} = props;
 
   const [title, setTitle] = useState('Combo 69K + Freeship');
@@ -164,4 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductsComboScreen;
+export default ProductsListHorizontal;

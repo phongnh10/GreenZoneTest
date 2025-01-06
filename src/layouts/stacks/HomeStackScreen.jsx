@@ -3,9 +3,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ScreenEnum from '../../constants/screenEnum';
 import HomeScreen from '../../screens/bottom-navs/HomeScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
-import ProductDetailSheet from '../../components/bottom_sheets/ProductDetailSheet';
-import ProductsComboScreen from '../../components/products/ProductsComboScreen';
-import ProductsNewDishScreen from '../../components/products/ProductsNewDishScreen';
+import ProductDetailSheet from '../../components/bottom-sheets/ProductDetailSheet';
+import ProductsListHorizontal from '../../components/products/ProductsListHorizontal';
+import ProductsListVertical from '../../components/products/ProductsListVertical';
 const HomeStack = createNativeStackNavigator();
 const HomeStackScreen = () => {
   return (
@@ -26,13 +26,13 @@ const HomeStackScreen = () => {
         }}
       />
       <HomeStack.Screen
-        name={ScreenEnum.ProductsComboScreen}
-        component={ProductsComboScreen}
+        name={ScreenEnum.ProductsListHorizontal}
+        component={ProductsListHorizontal}
       />
 
       <HomeStack.Screen
-        name={ScreenEnum.ProductsNewDishScreen}
-        component={ProductsNewDishScreen}
+        name={ScreenEnum.ProductsListVertical}
+        component={ProductsListVertical}
       />
     </HomeStack.Navigator>
   );
