@@ -87,15 +87,8 @@ const CardUtiliti = ({ icon, title, onPress }) => (
     </View>
   </Pressable>
 );
-// const CardUtiliti = ({ icon, title, onPress }) => (
-//   <Pressable style={styles.item} onPress={onPress}>
-//     <View style={styles.leftSection}>
-//       <Icon source={icon} size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.gray700} />
-//       <Text style={styles.itemText}>{title}</Text>
-//     </View>
-//   </Pressable>
-// );
 
+// test
 
 const styles = StyleSheet.create({
   container: {
