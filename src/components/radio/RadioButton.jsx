@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
         height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
         borderRadius: GLOBAL_KEYS.ICON_SIZE_DEFAULT / 2,
-        borderWidth: 2,
+        borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: GLOBAL_KEYS.PADDING_SMALL,

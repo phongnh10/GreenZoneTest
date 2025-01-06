@@ -11,11 +11,13 @@ const Selectable = ({
   selected,
   handlePlus,
   handleMinus,
+  activeIconColor = colors.primary,
+  activeTextColor = colors.primary
 
 }) => {
 
-  const activeColor = selected ? colors.primary : colors.gray400;
-  const textColor = selected ? colors.primary : colors.black;
+  const activeColor = selected ? activeIconColor : colors.gray400;
+  const textColor = selected ? activeTextColor: colors.black;
 
 
   return (
@@ -25,12 +27,12 @@ const Selectable = ({
           < QuantityButton
             iconName='plus'
             onPress={() => { handlePlus(item) }}
-            activeColor={activeColor} />
+            iconColor={activeColor} />
         )
           : (
             <QuantitySelector
               quantity={quantity}
-              activeColor={activeColor}
+              iconColor={activeColor}
               handlePlus={() => handlePlus(item)}
               handleMinus={() => handleMinus(item)}
             />

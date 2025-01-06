@@ -3,14 +3,41 @@ import { View, StyleSheet, Pressable } from 'react-native';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/globalKeys';
 import Feather from 'react-native-vector-icons/Feather';
+import PropTypes from 'prop-types';
 
-const QuantityButton = ({ iconName, onPress, activeColor }) => (
+
+const QuantityButtonPropTypes = {
+    iconName: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    iconColor: PropTypes.string,
+    iconSize: PropTypes.number,
+    style: PropTypes.object
+}
+
+
+/**
+ * Usage Example
+ *  <QuantityButton
+         iconName="plus"
+         onPress={() => {}}
+         iconColor={colors.primary}
+    />
+ */
+const QuantityButton = ({
+    iconName,
+    onPress,
+    iconColor,
+    iconSize = 18,
+    style
+}) => (
     <Pressable onPress={onPress}>
-        <View style={[styles.circleWrapper, { borderColor: activeColor }]}>
-            <Feather name={iconName} color={activeColor} size={18} />
+        <View style={[styles.circleWrapper, { borderColor: iconColor }, style]}>
+            <Feather name={iconName} color={iconColor} size={iconSize} />
         </View>
     </Pressable>
 );
+
+QuantityButton.propTypes = QuantityButtonPropTypes
 
 const styles = StyleSheet.create({
     circleWrapper: {

@@ -12,7 +12,9 @@ const SelectableGroup = ({
     selectedGroup,
     setSelectedGroup,
     required = false,
-    note
+    note,
+    activeIconColor = colors.primary,
+    activeTextColor = colors.primary
 }) => {
 
     return (
@@ -30,6 +32,8 @@ const SelectableGroup = ({
                         selected={selectedGroup.some(selectedItem => selectedItem.id === item.id)}
                         handlePlus={(item) => handlePlus(item, selectedGroup, setSelectedGroup)}
                         handleMinus={(item) => handleMinus(item, selectedGroup, setSelectedGroup)}
+                        activeIconColor = {activeIconColor}
+                        activeTextColor = {activeTextColor}
                         key={item.id}
                     />
                 );

@@ -71,6 +71,8 @@ const ProductDetailSheet = (props) => {
                     selectedGroup={selectedGroup}
                     setSelectedGroup={setSelectedGroup}
                     note="Tối đa 3 toppings"
+                    activeIconColor = {colors.pink500}
+                    activeTextColor = {colors.red900}
                 />
 
                 <NotesList
