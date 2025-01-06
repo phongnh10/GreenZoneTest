@@ -52,12 +52,11 @@ const MerchantScreen = (props) => {
   )
 }
 
-
 const renderItem = ({ item }) => (
   <TouchableOpacity style={styles.item}>
     <Image source={{ uri: item.image }} style={styles.imageItem} />
     <View style={styles.infoItem}>
-      <Text style={styles.title}>{item.name}</Text>
+      <Text style={styles.titleMerchant}>{item.name}</Text>
       <Text style={styles.location}>{item.location}</Text>
       <Text style={styles.distance}>{item.distance}</Text>
     </View>
@@ -144,18 +143,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
-  title:{
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  distance: {
+  titleMerchant:{
     fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
-    color: colors.gray400,
+    fontWeight: 'bold',
+    color: colors.gray700
   },
   location: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    color: colors.gray850,
+    color: colors.black,
+    fontWeight: '500'
+  },
+  distance: {
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
+    color: colors.gray700,
   },
   title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,

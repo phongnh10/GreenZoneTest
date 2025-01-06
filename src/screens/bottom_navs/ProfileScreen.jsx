@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     elevation: 3,
-    gap: GLOBAL_KEYS.GAP_DEFAULT,
+    gap: GLOBAL_KEYS.GAP_SMALL,
   },
   cardText: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,

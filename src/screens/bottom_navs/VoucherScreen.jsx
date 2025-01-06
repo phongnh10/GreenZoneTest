@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, SafeAreaView, ImageBackground, TouchableOpacity, Dimensions, Pressable, Alert } from 'react-native';
+import { StyleSheet, Image, SafeAreaView, ImageBackground, Pressable, Alert } from 'react-native';
 import { View, Text } from 'react-native';
 import LightStatusBar from '../../components/status_bars/LightStatusBar';
 import GLOBAL_KEYS from '../../constants/global_keys';
@@ -20,16 +20,16 @@ const VoucherScreen = () => {
           <Text style={styles.title}>Ưu đãi</Text>
           <View style={styles.content}>
             <Text style={styles.title}>Mới</Text>
-            <TouchableOpacity style={styles.myticket}>
-              <Icon 
-                source="ticket-confirmation-outline" 
-                size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} 
-                color={colors.primary} 
-                />
-              <Text style={styles.tmyvoucher}>Voucher của tôi</Text>
-            </TouchableOpacity>
+            <Pressable style={styles.myTicket}>
+              <Icon
+                source="ticket-confirmation-outline"
+                size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+                color={colors.primary}
+              />
+              <Text style={styles.textVoucher}>Voucher của tôi</Text>
+            </Pressable>
           </View>
-          <View style={styles.barcode}>
+          <View style={styles.barCode}>
             <Image source={require('../../assets/images/barcode.png')} style={styles.imgcode} />
             <Text>M41352236</Text>
           </View>
@@ -68,10 +68,12 @@ const VoucherScreen = () => {
 
         <View style={styles.ticket}>
           <Text style={styles.ticketTitle}>Phiếu ưu đãi của bạn</Text>
-          <Pressable style={styles.allTicket}>
-            <Text style={styles.textall}>Xem tất cả</Text>
+          <Pressable style={styles.btnTicket}>
+            <Text style={styles.textBtn}>Xem tất cả</Text>
           </Pressable>
         </View>
+
+
       </View>
     </SafeAreaView>
   );
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  myticket: {
+  myTicket: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
@@ -122,10 +124,10 @@ const styles = StyleSheet.create({
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     gap: GLOBAL_KEYS.GAP_SMALL,
   },
-  tmyvoucher: {
+  textVoucher: {
     color: colors.primary,
   },
-  barcode: {
+  barCode: {
     backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
   },
   imgcode: {
     width: '100%',
+    resizeMode: 'contain'
   },
   row: {
     flexDirection: 'row',
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
+    gap: GLOBAL_KEYS.GAP_SMALL,
     justifyContent: 'space-between',
     shadowColor: colors.gray700,
     shadowOffset: { width: 0, height: 3 },
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: colors.black,
   },
   ticket: {
@@ -164,19 +168,18 @@ const styles = StyleSheet.create({
   },
   ticketTitle: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
-    fontWeight: 'bold',
+    fontWeight: '900',
     color: colors.gray900,
   },
-  allTicket: {
+  btnTicket: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.green500,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
   },
-  textall: {
+  textBtn: {
     color: colors.white,
-    fontWeight: 'bold',
   },
 });
 
