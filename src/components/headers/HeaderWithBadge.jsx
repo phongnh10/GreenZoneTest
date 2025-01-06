@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: GLOBAL_KEYS.GAP_SMALL,
     alignItems: 'center',
-    backgroundColor: 'black',
   },
   right: {
     flexDirection: 'row',
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
     fontWeight: 'bold',
-    color: colors.white,
   },
 
   image: {
