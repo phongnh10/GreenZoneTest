@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import NormalHeader from '../../components/headers/NormalHeader';
 import colors from '../../constants/color';
 import {Icon} from 'react-native-paper';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 import {Dimensions} from 'react-native';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import {CustomFlatInput} from '../../components/inputs/FlatInput';

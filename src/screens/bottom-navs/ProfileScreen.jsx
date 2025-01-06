@@ -13,7 +13,8 @@ import colors from '../../constants/color';
 import LightStatusBar from '../../components/status-bars/LightStatusBar';
 import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
 
-const ProfileScreen = () => {
+const ProfileScreen = props => {
+  const {navigation} = props;
   return (
     <SafeAreaView style={styles.container}>
       <LightStatusBar />
@@ -26,7 +27,7 @@ const ProfileScreen = () => {
               icon="account"
               color={colors.primary}
               title="Thông tin cá nhân"
-              onPress={() => alert('Thông tin cá nhân!')}
+              onPress={() => navigation.navigate('UpdateProfileScreen')}
             />
             <CardAccount
               icon="google-maps"

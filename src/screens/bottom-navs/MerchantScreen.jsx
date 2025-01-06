@@ -11,7 +11,7 @@ import {
   SectionList,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/globalKeys';
 import HeaderWithbadge from '../../components/headers/HeaderWithBadge';
@@ -22,12 +22,21 @@ import CustomSearchBar from '../../components/inputs/CustomSearchBar';
 const {width, height} = Dimensions.get('window');
 
 const MerchantScreen = props => {
+  const [searchQuery, setSearchQuery] = useState();
   return (
     <SafeAreaView style={styles.container}>
       <HeaderWithbadge title="Cửa hàng" />
       <View style={styles.content}>
         <View style={styles.tool}>
-          <CustomSearchBar style={{width: width / 1.5}} />
+          <CustomSearchBar
+            placeholder="Tìm kiếm ghi chú..."
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            onClearIconPress={() => setSearchQuery('')}
+            leftIcon="magnify"
+            rightIcon="close"
+            style={{flex: 1}}
+          />
           <View style={styles.map}>
             <Icon
               source="google-maps"

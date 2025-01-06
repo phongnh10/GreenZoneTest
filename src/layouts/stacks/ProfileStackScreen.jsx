@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ScreenEnum from '../../constants/screenEnum';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ProfileScreen from '../../screens/bottom-navs/ProfileScreen';
+import UpdateProfileScreen from '../../screens/user_profile/UpdateProfileScreen';
 
 const ProfileStack = createNativeStackNavigator();
 const ProfileStackScreen = () => {
@@ -23,6 +24,11 @@ const ProfileStackScreen = () => {
       <ProfileStack.Screen
         name={ScreenEnum.UpdateProfileScreen}
         component={UpdateProfileScreen}
+        options={{
+          animation: 'slide_from_right',
+          presentation: 'transparentModal',
+          headerShown: false,
+        }}
       />
     </ProfileStack.Navigator>
   );

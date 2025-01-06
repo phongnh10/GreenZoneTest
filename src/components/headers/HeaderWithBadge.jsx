@@ -1,18 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import IconWithBadge from './IconWithBadge';
 import colors from '../../constants/color';
-import { Icon } from 'react-native-paper';
+import {Icon} from 'react-native-paper';
 import GLOBAL_KEYS from '../../constants/globalKeys';
 
-
-const HeaderWithBadge = (props) => {
-  const { title, onBadgePress, isHome } = props;
+const HeaderWithBadge = props => {
+  const {title, onBadgePress, isHome} = props;
   return (
     <View style={styles.header}>
-
-
-      { // Kiểm tra xem có phải trang Home hay không
+      {
+        // Kiểm tra xem có phải trang Home hay không
         // 1. Nếu là trang Home thì đổi Header Chào user
         // 2. Nếu không phải Home thì chỉ hiển thị Header Title
         isHome ? (
@@ -22,15 +20,18 @@ const HeaderWithBadge = (props) => {
               style={styles.image}
             />
             <Text style={styles.title}>Chào bạn mới</Text>
-            <Icon source='hand-wave' color={colors.yellow700} size={GLOBAL_KEYS.ICON_SIZE_SMALL} />
+            <Icon
+              source="hand-wave"
+              color={colors.yellow700}
+              size={GLOBAL_KEYS.ICON_SIZE_SMALL}
+            />
           </View>
-
         ) : (
           <View style={styles.left}>
             <Text style={styles.title}>{title}</Text>
           </View>
-        )}
-
+        )
+      }
 
       <View style={styles.right}>
         <IconWithBadge onPress={onBadgePress} />
@@ -47,12 +48,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-
   },
   left: {
     flexDirection: 'row',
     gap: GLOBAL_KEYS.GAP_SMALL,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   right: {
     flexDirection: 'row',
@@ -61,14 +62,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_HEADER,
     fontWeight: 'bold',
-    color: colors.black,
+    color: colors.white,
   },
 
   image: {
     width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
   },
-
 });
 
-export default HeaderWithBadge
+export default HeaderWithBadge;
