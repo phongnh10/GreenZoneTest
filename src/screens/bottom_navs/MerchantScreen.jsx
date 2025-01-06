@@ -1,23 +1,23 @@
-import { StyleSheet, Image, SafeAreaView, Text, View, ScrollView , TouchableOpacity, FlatList, TextInput, SectionList, Dimensions} from 'react-native'
+import { StyleSheet, Image, SafeAreaView, Text, View, ScrollView, TouchableOpacity, FlatList, TextInput, SectionList, Dimensions } from 'react-native'
 import React from 'react'
 import colors from '../../constants/color';
 import GLOBAL_KEYS from '../../constants/global_keys';
 import HeaderWithbadge from '../../components/headers/HeaderWithBadge'
-import  {Icon}  from 'react-native-paper';
+import { Icon } from 'react-native-paper';
 import CustomSearchBar from '../../components/inputs/CustomSearchBar';
 
 // commit again Duong branch
-const {width, height} = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 const MerchantScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithbadge  title='Cửa hàng'/>
+      <HeaderWithbadge title='Cửa hàng' />
       <View style={styles.content}>
-      
+
         <View style={styles.tool}>
 
-          <CustomSearchBar style={{width: width/1.5}}/>
+          <CustomSearchBar style={{ width: width / 1.5 }} />
           <View style={styles.map}>
             <Icon source="google-maps" size={GLOBAL_KEYS.ICON_SIZE_DEFAULT} color={colors.primary} />
             <Text style={styles.textMap}>
@@ -26,26 +26,25 @@ const MerchantScreen = (props) => {
           </View>
         </View>
 
-          <View>
-            <Text style={styles.title}>
-                  Cửa hàng gần bạn
-              </Text>
-              <FlatList
-                data={data.slice(0, 1)}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-              />
-          </View>
-
-          <Text style={styles.title}>
-              Cửa hàng Khác
+        <View style={styles.mechant1}>
+          <Text style={styles.tittle}>
+            Cửa hàng gần bạn
           </Text>
           <FlatList
-            data={data}
+            data={data.slice(0, 1)}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
           />
+        </View>
+        <Text style={styles.tittle}>
+          Cửa hàng Khác
+        </Text>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </SafeAreaView>
 
@@ -56,7 +55,7 @@ const renderItem = ({ item }) => (
   <TouchableOpacity style={styles.item}>
     <Image source={{ uri: item.image }} style={styles.imageItem} />
     <View style={styles.infoItem}>
-      <Text style={styles.titleMerchant}>{item.name}</Text>
+      <Text style={styles.title}>{item.name}</Text>
       <Text style={styles.location}>{item.location}</Text>
       <Text style={styles.distance}>{item.distance}</Text>
     </View>
@@ -123,19 +122,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: colors.white,
   },
-  content:{
+  content: {
     paddingHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
-    flex: 1
   },
-  tool:{
+  tool: {
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
     paddingVertical: GLOBAL_KEYS.PADDING_SMALL,
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
-  map:{
+  map: {
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',
@@ -143,19 +141,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
 
-  titleMerchant:{
-    fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
-    fontWeight: 'bold',
-    color: colors.gray700
-  },
-  location: {
+  tittle: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    color: colors.black,
-    fontWeight: '500'
+    fontWeight: 'bold',
+    marginVertical: 10,
   },
   distance: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
-    color: colors.gray700,
+    color: colors.gray400,
+  },
+  location: {
+    fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
+    color: colors.gray850,
   },
   title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
@@ -177,18 +174,21 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
-    marginBottom: 8, 
+    marginBottom: 8,
     borderWidth: 1,
-    borderColor: colors.gray200,
+    borderColor: colors.gray300,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 3 },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation:  3 
+    elevation: 4,
   },
+  mechant1: {
+
+  }
 
 })
 

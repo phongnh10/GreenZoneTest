@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import colors from '../../constants/color';
-import GLOBAL_KEYS from '../../constants/global_keys';
+import GLOBAL_KEYS from '../../constants/globalKeys';
 
 const NormalHeader = props => {
   const {

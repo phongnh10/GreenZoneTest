@@ -13,9 +13,7 @@ import React from 'react';
 import ScreenEnum from '../../constants/screenEnum';
 import HeaderWithBadge from '../../components/headers/HeaderWithBadge';
 import colors from '../../constants/color';
-import LightStatusBar from '../../components/status_bars/LightStatusBar';
-import OverlayStatusBar from '../../components/status_bars/OverlayStatusBar';
-import CategoryScreen from '../../components/category/CategoryScreen';
+import LightStatusBar from '../../components/status-bars/LightStatusBar';
 
 const {width} = Dimensions.get('window');
 
@@ -47,6 +45,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: colors.white,
-  },
+    backgroundColor: colors.white
+  }
+
 });

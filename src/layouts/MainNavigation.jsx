@@ -1,7 +1,7 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-paper';
-import {Text} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-paper';
+import { Text } from 'react-native';
 import colors from '../constants/color';
 import ScreenEnum from '../constants/screenEnum';
 import HomeStackScreen from './stacks/HomeStackScreen';
@@ -9,7 +9,7 @@ import ProfileStackScreen from './stacks/ProfileStackScreen';
 import VoucherStackScreen from './stacks/VoucherStackScreen';
 import MerchantStackScreen from './stacks/MerchantStackScreen';
 import OrderStackScreen from './stacks/OrderStackScreen';
-import GLOBAL_KEYS from '../constants/global_keys';
+import GLOBAL_KEYS from '../constants/globalKeys';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -52,7 +52,7 @@ const MainNavigation = () => {
           let label;
 
           if (route.name === ScreenEnum.HomeStackScreen) {
-            label = 'Trang Chủ';
+            label = 'Trang chủ';
           } else if (route.name === ScreenEnum.OrderStackScreen) {
             label = 'Đặt hàng';
           } else if (route.name === ScreenEnum.MerchantStackScreen) {
@@ -64,11 +64,7 @@ const MainNavigation = () => {
           }
 
           return (
-            <Text
-              style={{
-                color: focused ? colors.primary : colors.gray700,
-                fontSize: 12,
-              }}>
+            <Text style={{ color: focused ? colors.primary : colors.gray700, fontSize: 12 }}>
               {label}
             </Text>
           );

@@ -70,7 +70,7 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default ProfileScreen
 
 const CardAccount = ({ icon, color, title, onPress }) => (
   <Pressable style={styles.card} onPress={onPress}>

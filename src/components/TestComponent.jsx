@@ -1,75 +1,90 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Thêm icon
 import colors from '../constants/color';
-import FlatInput from './inputs/FlatInput';
-
-import GLOBAL_KEYS from '../constants/global_keys';
-
+import GLOBAL_KEYS from '../constants/globalKeys';
+import CustomSearchBar from './inputs/CustomSearchBar';
+import NotesList from './notes-list/NotesList';
 
 const TestComponent = () => {
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [errors, setErrors] = useState({
-    fullname: '',
-    email: '',
-    password: '',
-  });
+  const [selectedNotes, setSelectedNotes] = useState([]); // Danh sách các note được chọn
+  const [searchQuery, setSearchQuery] = useState(''); // Nội dung tìm kiếm
 
-  const validateInputs = () => {
-    const newErrors = {
-      fullname: fullname.trim() === '' ? 'Fullname is required' : '',
-      email: email.trim() === '' ? 'Email is required' : '',
-      password: password.trim() === '' ? 'Password is required' : '',
-    };
-    setErrors(newErrors);
+  const onToggleNote = (note) => {
+    if (selectedNotes.includes(note)) {
+      // Nếu đã được chọn, bỏ chọn
+      setSelectedNotes(selectedNotes.filter((item) => item !== note));
+    } else {
+      // Nếu chưa được chọn, thêm vào danh sách
+      setSelectedNotes([...selectedNotes, note]);
+    }
   };
+
+  const filteredNotes = notes.filter((note) =>
+    note.toLowerCase().includes(searchQuery.toLowerCase())
+  ); // Lọc danh sách theo nội dung tìm kiếm
 
   return (
     <View style={styles.container}>
-      <FlatInput
-        label="Fullname"
-        value={fullname}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, fullname: '' }));
-          setFullname(value);
-        }}
-        message={errors.fullname}
+      {/* SearchBar và Bản đồ */}
+      <View style={styles.searchBarContainer}>
+        <CustomSearchBar
+          placeholder="Tìm kiếm ghi chú..."
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onClearIconPress={() => setSearchQuery('')}
+          leftIcon="magnify"
+          rightIcon="close"
+          style={{ flex: 1, marginRight: 16, elevation: 3 }}
+        />
+        {/* Text Bản đồ và Icon Map */}
+        <View style={styles.mapContainer}>
+          <Icon name="map-marker" size={24} color={colors.primary} style={styles.mapIcon} />
+          <Text style={styles.mapText}>Bản đồ</Text>
+
+        </View>
+
+        {/* CustomSearchBar */}
+
+      </View>
+
+      {/* Danh sách ghi chú */}
+      <NotesList
+        selectedNotes={selectedNotes}
+        onToggleNote={onToggleNote}
+        notes={filteredNotes} // Chỉ hiển thị các ghi chú đã lọc
       />
-      <FlatInput
-        label="Email"
-        value={email}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, email: '' }));
-          setEmail(value);
-        }}
-        message={errors.email}
-      />
-      <FlatInput
-        label="Password"
-        value={password}
-        setValue={(value) => {
-          setErrors((prev) => ({ ...prev, password: '' }));
-          setPassword(value);
-        }}
-        message={errors.password}
-        secureTextEntry
-        isPasswordVisible={isPasswordVisible}
-        setIsPasswordVisible={setIsPasswordVisible}
-      />
-      <Button title="Validate" onPress={validateInputs} />
     </View>
   );
 };
+
+const notes = ['Ít cafe', 'Đậm trà', 'Không kem', 'Nhiều cafe', 'Ít sữa', 'Nhiều sữa', 'Nhiều kem'];
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
     padding: GLOBAL_KEYS.PADDING_DEFAULT,
-    gap: GLOBAL_KEYS.GAP_DEFAULT,
   },
+  searchBarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 16,
+  },
+  mapContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  mapText: {
+    fontSize: 16,
+    color: colors.primary,
+    marginRight: 8,
+    fontWeight: 'bold',
+  },
+  mapIcon: {
+    marginRight: 8,
+  },
+
 });
 
-export default TestComponent
+export default TestComponent;
