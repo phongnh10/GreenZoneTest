@@ -41,11 +41,6 @@ const HomeScreen = props => {
         <ProductsNewDishScreen
           onItemClick={() => navigation.navigate('ProductDetailSheet')}
         />
-
-        <Button
-          title="Open Modal"
-          onPress={() => navigation.navigate('ProductDetailSheet')}
-        />
       </SafeAreaView>
     </ScrollView>
   );

@@ -18,15 +18,12 @@ const width = Dimensions.get('window').width;
 const ProductsListHorizontal = props => {
   const {onItemClick} = props;
 
-  const [title, setTitle] = useState('Combo 69K + Freeship');
-  const [time, setTime] = useState('08:00:00');
-
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerTextContainer}>
-          <Text style={styles.headerText}>{title}</Text>
-          <Text style={styles.timeText}>{time}</Text>
+          <Text style={styles.headerText}>Combo 69K + Freeship</Text>
+          <Text style={styles.timeText}>08:00:00</Text>
         </View>
         <FlatList
           data={productsCombo}
@@ -38,7 +35,7 @@ const ProductsListHorizontal = props => {
           contentContainerStyle={{
             gap: GLOBAL_KEYS.GAP_DEFAULT,
           }}
-          scrollEnabled={false}
+          scrollEnabled={true}
         />
       </View>
     </View>
@@ -52,21 +49,17 @@ const ItemProduct = ({item, onItemClick}) => {
       <View style={styles.priceContainer}>
         <Text style={styles.priceText}>{formatVND(item.price)}</Text>
       </View>
-      <View style={styles.productNameContainer}>
-        <Text numberOfLines={4} style={styles.productNameText}>
-          {item.name}
-        </Text>
-      </View>
+      <Text numberOfLines={4} style={styles.productNameText}>
+        {item.name}
+      </Text>
       <TouchableOpacity
         onPress={() => onItemClick()}
         style={styles.addButtonContainer}>
-        <View style={styles.addButton}>
-          <Icon
-            source="plus"
-            color={colors.primary}
-            size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
-          />
-        </View>
+        <Icon
+          source="plus"
+          color={colors.primary}
+          size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -81,6 +74,18 @@ const productsCombo = [
   },
   {
     id: '2',
+    name: 'Combo 3 Olong Tea',
+    image: require('../../assets/images/imgae_product_combo/image_combo_3_milk_tea.png'),
+    price: 79000,
+  },
+  {
+    id: '3',
+    name: 'Combo 3 Olong Tea',
+    image: require('../../assets/images/imgae_product_combo/image_combo_2_milk_tea.png'),
+    price: 79000,
+  },
+  {
+    id: '4',
     name: 'Combo 3 Olong Tea',
     image: require('../../assets/images/imgae_product_combo/image_combo_3_milk_tea.png'),
     price: 79000,
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: colors.black,
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    fontWeight: 'semibold',
+    fontWeight: '500',
   },
   timeText: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
@@ -117,8 +122,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemImage: {
-    width: width / 2 - GLOBAL_KEYS.GAP_DEFAULT * 1.5,
-    height: (width / 4) * 3,
+    width: 157,
+    height: 235,
     resizeMode: 'cover',
     opacity: 0.5,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
@@ -134,33 +139,25 @@ const styles = StyleSheet.create({
     color: colors.primary,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
-    fontWeight: 'semibold',
-  },
-  productNameContainer: {
-    position: 'absolute',
-    bottom: '15%',
-    width: '70%',
-    height: '30%',
+    fontWeight: '500',
   },
   productNameText: {
     color: colors.white,
     padding: GLOBAL_KEYS.PADDING_SMALL,
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
     fontWeight: 'bold',
+    position: 'absolute',
+    bottom: '15%',
   },
   addButtonContainer: {
     position: 'absolute',
     bottom: 0,
     end: 0,
     margin: GLOBAL_KEYS.PADDING_DEFAULT,
-  },
-  addButton: {
     width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

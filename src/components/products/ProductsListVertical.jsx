@@ -18,11 +18,9 @@ const width = Dimensions.get('window').width;
 const ProductsListVertical = props => {
   const {onItemClick} = props;
 
-  const [title, setTitle] = useState('Món Mới Phải Thử');
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>Món Mới Phải Thử</Text>
       <View style={styles.flatListWrapper}>
         <FlatList
           data={productsNewDish}
@@ -47,13 +45,11 @@ const ItemProduct = ({item, onItemClick}) => {
         <Text style={styles.productPrice}>{formatVND(item.price)}</Text>
       </View>
       <TouchableOpacity onPress={() => onItemClick()} style={styles.addButton}>
-        <View style={styles.addButtonIcon}>
-          <Icon
-            source="plus"
-            size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
-            color={colors.white}
-          />
-        </View>
+        <Icon
+          source="plus"
+          size={GLOBAL_KEYS.ICON_SIZE_DEFAULT}
+          color={colors.white}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -92,12 +88,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_DEFAULT,
-    fontWeight: 'semibold',
+    fontWeight: '500',
     color: colors.black,
   },
   flatListWrapper: {
-    marginHorizontal: GLOBAL_KEYS.GAP_SMALL,
-    marginVertical: GLOBAL_KEYS.GAP_DEFAULT,
+    marginHorizontal: GLOBAL_KEYS.PADDING_SMALL,
+    marginVertical: GLOBAL_KEYS.PADDING_DEFAULT,
   },
   flatListContentContainer: {
     gap: GLOBAL_KEYS.GAP_DEFAULT,
@@ -108,17 +104,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemImage: {
-    width: width / 4,
-    height: width / 4,
+    width: width / 4.5,
+    height: width / 4.5,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
   },
   productInfo: {
     flexDirection: 'column',
-    width: '50%',
+    flex: 1,
+    marginHorizontal: GLOBAL_KEYS.PADDING_DEFAULT,
   },
   productName: {
     fontSize: GLOBAL_KEYS.TEXT_SIZE_SMALL,
-    fontWeight: 'semibold',
+    fontWeight: '500',
   },
   productPrice: {
     marginTop: GLOBAL_KEYS.PADDING_SMALL,
@@ -126,13 +123,13 @@ const styles = StyleSheet.create({
     color: colors.red900,
   },
   addButton: {
-    justifyContent: 'flex-end',
-  },
-  addButtonIcon: {
     width: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     height: GLOBAL_KEYS.ICON_SIZE_DEFAULT,
     borderRadius: GLOBAL_KEYS.BORDER_RADIUS_DEFAULT,
     backgroundColor: colors.primary,
+    position: 'absolute',
+    end: 0,
+    bottom: 0,
   },
 });
 
